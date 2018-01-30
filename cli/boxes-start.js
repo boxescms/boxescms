@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 
-const program = require('commander')
-const {version} = require('../package.json')
+const path = require('path')
 
-program
-  .version(version)
-  .parse(process.argv)
+require('dotenv').config({
+  path: path.resolve(process.cwd(), '.env')
+})
+
+const gulp = require('../gulpfile')
+
+gulp.task('default')(() => {
+  require('../server')
+})
