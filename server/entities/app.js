@@ -3,6 +3,8 @@ require('../../helpers/checkIsProjectFolder')
 const express = require('express')
 const app = express()
 
+app.use(require('compression')())
+
 app.use('/', require('../api'))
 app.use('/', require('../routes'))
 

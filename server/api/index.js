@@ -1,5 +1,3 @@
-require('../../helpers/checkIsProjectFolder')
-
 const base = process.cwd()
 const glob = require('glob')
 const path = require('path')

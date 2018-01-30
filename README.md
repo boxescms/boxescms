@@ -1,19 +1,17 @@
 # boxescms
+
 ExpressJS based API centric CMS.
 
 # Underlying tools
 
 1. [Express](https://expressjs.com/)
-2. [Knex.js](http://knexjs.org/)
-3. [Gulp](https://gulpjs.com/)
-4. [Sass](http://sass-lang.com/)
-5. [Pug](https://pugjs.org)
-6. [Webpack](https://webpack.js.org/)
-7. [Babel](https://babeljs.io/)
-8. [Bootstrap](https://getbootstrap.com/)
-9. [Vue.js](https://vuejs.org/)
-10. [Commander.js](https://tj.github.io/commander.js/)
-11. [Ava](https://github.com/avajs/ava)
+2. [Gulp](https://gulpjs.com/)
+3. [Sass](http://sass-lang.com/)
+4. [Pug](https://pugjs.org)
+5. [Webpack](https://webpack.js.org/)
+6. [Babel](https://babeljs.io/)
+7. [Bootstrap](https://getbootstrap.com/)
+8. [Vue.js](https://vuejs.org/)
 
 # Structure
 
@@ -39,16 +37,12 @@ Web related files (html, pug, css, sass, js, images, fonts).
 
 ## /public/
 
-Should be ignored. Web files will be compiled here, and served as root static by Node server.
+Contents should be ignored. Web files will be compiled here, and served as root static by Node server.
 
-## /cli/
+## /storage/
 
-Custom cli scripts.
+Contents should be ignored. Storage folder for various runtime data usage.
 
-## /migrations/
+## /conf/
 
-Custom migrations. Uses Knex.js.
-
-## /seeds/
-
-Custom seeds. Uses Knex.js.
+External configuration files.

@@ -14,8 +14,6 @@ const base = process.cwd()
   'storage',
   'storage/logs',
   'storage/tmp',
-  'migrations',
-  'seeds',
   'conf',
   'conf/nginx'
 ]
