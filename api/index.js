@@ -1,10 +1,10 @@
 const base = process.cwd()
 const glob = require('glob')
 const path = require('path')
-const router = require('express').Router()
-const bodyParser = require('body-parser')
+const express = require('express')
+const router = express.Router()
 
-router.use(bodyParser.json())
+router.use(express.json())
 
 glob.sync(path.resolve(base, 'server/api/**/*.js'))
   .map(file => {

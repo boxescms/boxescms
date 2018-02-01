@@ -1,18 +1,11 @@
-const fs = require('fs')
-const path = require('path')
 const base = process.cwd()
-
-const storageFile = path.join(base, 'storage/admins.json')
-
-if (!fs.existsSync(storageFile)) {
-  fs.writeFileSync(storageFile, '{}')
-}
-
-const admins = require(storageFile)
-
+const {promisify} = require('util')
+const path = require('path')
 const router = require('express').Router()
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
+const glob = promisify(require('glob'))
+const Admin = require('../stores/admin')
 const requiredFields = require('../middlewares/requiredFields')
 const authorizeAdmin = require('../middlewares/authorizeAdmin')
 const getAdmin = require('../middlewares/getAdmin')
@@ -36,15 +29,17 @@ router.get('/',
 router.post('/',
   requiredFields('username', 'password'),
   (req, res, next) => {
-    if (!admins[req.body.username]) {
+    if (!Admin.exist(req.body.username)) {
       return next(new Error('Invalid credentials.'))
     }
 
+    const admin = Admin.get(req.body.username)
+
     const hash = crypto.createHash('sha512')
 
-    const hashedPassword = hash.update(req.body.password + admins[req.body.username].salt + process.env.APP_KEY).digest('hex')
+    const hashedPassword = hash.update(req.body.password + admin.salt + process.env.APP_KEY).digest('hex')
 
-    if (admins[req.body.username].password !== hashedPassword) {
+    if (admin.password !== hashedPassword) {
       return next(new Error('Invalid credentials.'))
     }
 
@@ -63,14 +58,14 @@ router.post('/',
 router.put('/',
   getAdmin,
   requiredFields('username', 'password'),
-  (req, res, next) => {
-    const totalAdmins = Object.keys(admins).length
+  async (req, res, next) => {
+    const totalAdmins = Admin.count()
 
     if (totalAdmins && !req.admin) {
       return next(new Error('Unauthorized.'))
     }
 
-    if (admins[req.body.username]) {
+    if (Admin.exist(req.body.username)) {
       return next(new Error('Admin exist.'))
     }
 
@@ -79,12 +74,11 @@ router.put('/',
 
     const hashedPassword = hash.update(req.body.password + salt + process.env.APP_KEY).digest('hex')
 
-    admins[req.body.username] = {
+    await Admin.create({
+      username: req.body.username,
       password: hashedPassword,
       salt
-    }
-
-    fs.writeFileSync(storageFile, JSON.stringify(admins, null, 2))
+    })
 
     res.json({
       username: req.body.username
@@ -96,8 +90,8 @@ router.delete('/',
   getAdmin,
   authorizeAdmin,
   requiredFields('username'),
-  (req, res, next) => {
-    if (!admins[req.body.username]) {
+  async (req, res, next) => {
+    if (!Admin.exist(req.body.username)) {
       return next(new Error('No such admin.'))
     }
 
@@ -105,14 +99,44 @@ router.delete('/',
       return next(new Error('Unauthorized.'))
     }
 
-    delete admins[req.body.username]
-
-    fs.writeFileSync(storageFile, JSON.stringify(admins, null, 2))
+    await Admin.remove(req.body.username)
 
     res.json({
       username: req.body.username
     })
     return res.end()
   })
+
+router.get('/pages',
+  getAdmin,
+  authorizeAdmin,
+  async (req, res, next) => {
+    try {
+      const pages = await glob(path.join(base, 'public/admin/*.html'))
+
+      res.json(pages.map(page => path.basename(page, '.html')))
+      return res.end()
+    } catch (err) {
+      return next(err)
+    }
+  }
+)
+
+router.get('/models',
+  getAdmin,
+  authorizeAdmin,
+  (req, res, next) => {
+    res.json([])
+    return res.end()
+  }
+)
+
+router.get('/datasources',
+  getAdmin,
+  authorizeAdmin,
+  (req, res, next) => {
+
+  }
+)
 
 module.exports = router

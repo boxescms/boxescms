@@ -9,5 +9,5 @@ require('dotenv').config({
 const gulp = require('../gulpfile')
 
 gulp.task('default')(() => {
-  require('../server')
+  require('../')
 })

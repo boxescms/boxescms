@@ -1,15 +1,5 @@
 const jwt = require('jsonwebtoken')
-const fs = require('fs')
-const path = require('path')
-const base = process.cwd()
-
-const storageFile = path.join(base, 'storage/admins.json')
-
-if (!fs.existsSync(storageFile)) {
-  fs.writeFileSync(storageFile, '{}')
-}
-
-const admins = require(storageFile)
+const Admin = require('../stores/admin')
 
 module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
@@ -30,11 +20,11 @@ module.exports = (req, res, next) => {
     return next()
   }
 
-  if (!admins[token.username]) {
+  if (!Admin.exist(token.username)) {
     return next()
   }
 
-  req.admin = token.username
+  req.admin = Admin.get(token.username)
 
   next()
 }

@@ -22,8 +22,8 @@
   ],
   "dependencies": {
     "apidoc": "^0.17.6",
-    "body-parser": "^1.18.2",
-    "bootstrap-sass": "^3.3.7",
+    "ava": "^0.25.0",
+    "bootstrap": "^4.0.0",
     "commander": "^2.13.0",
     "compression": "^1.7.1",
     "dotenv": "^4.0.0",
