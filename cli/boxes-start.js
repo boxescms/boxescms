@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 
-const path = require('path')
+require('dotenv').config()
 
-require('dotenv').config({
-  path: path.resolve(process.cwd(), '.env')
-})
+require('../')
 
-const gulp = require('../gulpfile')
+// const gulp = require('../gulpfile')
 
-gulp.task('default')(() => {
-  require('../')
-})
+// gulp.task('default')(() => {
+//   require('../')
+// })

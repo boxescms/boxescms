@@ -1,10 +1,6 @@
-const base = process.cwd()
-const {promisify} = require('util')
-const path = require('path')
 const router = require('express').Router()
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
-const glob = promisify(require('glob'))
 const Admin = require('../stores/admin')
 const requiredFields = require('../middlewares/requiredFields')
 const authorizeAdmin = require('../middlewares/authorizeAdmin')
@@ -106,37 +102,5 @@ router.delete('/',
     })
     return res.end()
   })
-
-router.get('/pages',
-  getAdmin,
-  authorizeAdmin,
-  async (req, res, next) => {
-    try {
-      const pages = await glob(path.join(base, 'public/admin/*.html'))
-
-      res.json(pages.map(page => path.basename(page, '.html')))
-      return res.end()
-    } catch (err) {
-      return next(err)
-    }
-  }
-)
-
-router.get('/models',
-  getAdmin,
-  authorizeAdmin,
-  (req, res, next) => {
-    res.json([])
-    return res.end()
-  }
-)
-
-router.get('/datasources',
-  getAdmin,
-  authorizeAdmin,
-  (req, res, next) => {
-
-  }
-)
 
 module.exports = router

@@ -81,3 +81,18 @@ const base = process.cwd()
       }
     })
   })
+
+const packageFile = path.join(base, 'package.json')
+const packageData = require(packageFile)
+
+packageData.scripts = Object.assign({}, {
+  start: 'boxes start',
+  'server:start': 'boxes start',
+  'server:dev': 'nodemon --watch server --exec "boxes start"',
+  build: 'gulp',
+  watch: 'gulp watch'
+}, packageData.scripts)
+
+fs.writeFileSync(packageFile, JSON.stringify(packageData, null, 2))
+
+console.info('Updated package.json with default scripts')

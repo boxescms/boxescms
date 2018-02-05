@@ -14,19 +14,21 @@ const webpack = require('webpack')
 const named = require('vinyl-named')
 const {browserslist} = require(path.join(__dirname, 'package.json'))
 
+const {task, src, dest, watch, parallel, series} = gulp
+
 const isProduction = process.env.NODE_ENV === 'production' || process.env.ENV === 'production'
 
-gulp.task('clean', () => del(path.join(__dirname, 'tmp/**/*.html'), {
+task('clean', () => del(path.join(__dirname, 'tmp/**/*.html'), {
   force: true
 }))
 
-gulp.task('prepare:normalize', () => {
-  return gulp.src(path.join(__dirname, 'node_modules/normalize.css/normalize.css'))
-    .pipe(gulp.dest(path.join(base, 'public/admin/static')))
+task('prepare:normalize', () => {
+  return src(path.join(__dirname, 'node_modules/normalize.css/normalize.css'))
+    .pipe(dest(path.join(base, 'public/admin/static')))
 })
 
-gulp.task('hashsum', () => {
-  return gulp.src(path.join(base, 'public/**/*.{png,gif,jpg,css,js,svg}'))
+task('hashsum', () => {
+  return src(path.join(base, 'public/**/*.{png,gif,jpg,css,js,svg}'))
     .pipe(hashsum({
       dest: path.join(__dirname, 'tmp'),
       json: true,
@@ -34,68 +36,68 @@ gulp.task('hashsum', () => {
     }))
 })
 
-gulp.task('compile:html', () => {
-  return gulp.src([
+task('compile:html', () => {
+  return src([
     path.join(__dirname, 'web/pug/**/*.pug'),
     path.join(__dirname, '!web/pug/components/*.pug')
   ])
     .pipe(pug({
       locals: env.parsed
     }))
-    .pipe(gulp.dest(path.join(__dirname, 'tmp')))
+    .pipe(dest(path.join(__dirname, 'tmp')))
 })
 
-gulp.task('hash:html', () => {
+task('hash:html', () => {
   const sums = require(path.join(__dirname, 'tmp/hashsum.json'))
 
   const time = Date.now()
 
   const replacements = Object.keys(sums).map(sum => [sum, sum + '?' + time])
 
-  return gulp.src(path.join(__dirname, 'tmp/**/*.html'))
+  return src(path.join(__dirname, 'tmp/**/*.html'))
     .pipe(replace(replacements))
-    .pipe(gulp.dest(path.join(base, 'public/admin')))
+    .pipe(dest(path.join(base, 'public/admin')))
 })
 
-gulp.task('build:css', () => {
-  return gulp.src(path.join(__dirname, 'web/sass/**/*.sass'))
+task('build:css', () => {
+  return src(path.join(__dirname, 'web/sass/**/*.sass'))
     .pipe(sass({
       indentation: true
     }))
     .pipe(autoprefix({
       browsers: browserslist
     }))
-    .pipe(gulp.dest(path.join(base, 'public/admin/css')))
+    .pipe(dest(path.join(base, 'public/admin/css')))
 })
 
-gulp.task('build:js', () => {
-  return gulp.src(path.join(__dirname, 'web/js/**/*.js'))
+task('build:js', () => {
+  return src(path.join(__dirname, 'web/js/**/*.js'))
     .pipe(named())
     .pipe(webpackStream(require(isProduction ? './webpack.production.js' : './webpack.config.js'), webpack))
-    .pipe(gulp.dest(path.join(base, 'public/admin/js')))
+    .pipe(dest(path.join(base, 'public/admin/js')))
 })
 
-gulp.task('build:assets', () => {
-  return gulp.src(path.join(__dirname, 'web/assets/**'))
-    .pipe(gulp.dest(path.join(base, 'public/admin/assets')))
+task('build:assets', () => {
+  return src(path.join(__dirname, 'web/assets/**'))
+    .pipe(dest(path.join(base, 'public/admin/assets')))
 })
 
-gulp.task('build', gulp.series(
+task('build', series(
   'clean',
-  gulp.parallel('build:css', 'build:js', 'build:assets', 'compile:html'),
+  parallel('build:css', 'build:js', 'build:assets', 'compile:html'),
   'hashsum',
   'hash:html'
 ))
 
-// gulp.task('watch:html', () => gulp.watch('web/pug/**/*.pug', ['build:html']))
-// gulp.task('watch:css', () => gulp.watch('web/sass/**/*.sass', ['build:css']))
-// gulp.task('watch:js', () => gulp.watch(['web/js/**/*.js', 'web/components/**/*.vue', 'web/library/**/*.js'], ['build:js']))
-// gulp.task('watch:assets', () => gulp.watch('web/assets/**/*', ['build:assets']))
+task('watch:html', () => watch('web/pug/**/*.pug', ['build:html']))
+task('watch:css', () => watch('web/sass/**/*.sass', ['build:css']))
+task('watch:js', () => watch(['web/js/**/*.js', 'web/components/**/*.vue', 'web/library/**/*.js'], ['build:js']))
+task('watch:assets', () => watch('web/assets/**/*', ['build:assets']))
 
-// gulp.task('watch', gulp.series('prepare', 'build', gulp.parallel('watch:html', 'watch:css', 'watch:js', 'watch:assets')))
+task('prepare', parallel('prepare:normalize'))
 
-gulp.task('prepare', gulp.parallel('prepare:normalize'))
+task('default', parallel('prepare', 'build'))
 
-gulp.task('default', gulp.parallel('prepare', 'build'))
+task('watch', series('prepare', 'build', parallel('watch:html', 'watch:css', 'watch:js', 'watch:assets')))
 
 module.exports = gulp
