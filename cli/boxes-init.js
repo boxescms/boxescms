@@ -2,9 +2,14 @@
 
 require('../helpers/checkIsProjectFolder')
 
+const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
 const base = process.cwd()
+
+console.log()
+console.log(chalk.yellow('Creating folders...'))
+console.log('-------------------')
 
 ;[
   'server',
@@ -22,24 +27,15 @@ const base = process.cwd()
 
     try {
       fs.mkdirSync(folder)
-      console.info(`${item} created`)
+      console.log(`${folder} ${chalk.green('created')}`)
     } catch (err) {
-      console.error(`${item} exist`)
+      console.error(`${folder} ${chalk.grey('skipped')}`)
     }
   })
 
-;['.env.example', 'gulpfile.js']
-  .map(item => {
-    const file = path.resolve(__dirname, '../initfiles', item)
-
-    try {
-      fs.copyFileSync(file, path.join(base, item))
-      console.info(`${item} copied`)
-    } catch (err) {
-      console.log(err)
-      console.error(`${item} exist`)
-    }
-  })
+console.log()
+console.log(chalk.yellow('Copying default files...'))
+console.log('------------------------')
 
 ;[
   {
@@ -69,15 +65,24 @@ const base = process.cwd()
   {
     src: 'nginx.conf',
     dest: ['conf/nginx/app.conf']
+  },
+  {
+    src: 'index.js',
+    dest: ['index.js']
   }
 ]
   .map(item => {
     item.dest.map(d => {
       try {
-        fs.copyFileSync(path.resolve(__dirname, '../initfiles/' + item.src), path.join(base, d))
-        console.info(`${base}/${d} copied`)
+        const target = path.join(base, d)
+        if (fs.existsSync(target)) {
+          console.log(`${base}/${d} ${chalk.gray('skipped')}`)
+        } else {
+          fs.copyFileSync(path.resolve(__dirname, '../initfiles/' + item.src), target)
+          console.log(`${base}/${d} ${chalk.green('copied')}`)
+        }
       } catch (err) {
-        console.error(`${base}/${d} exist`)
+        console.error(`${base}/${d} ${chalk.red('error')}`)
       }
     })
   })
@@ -95,4 +100,18 @@ packageData.scripts = Object.assign({}, {
 
 fs.writeFileSync(packageFile, JSON.stringify(packageData, null, 2))
 
-console.info('Updated package.json with default scripts')
+console.log()
+console.log(chalk.yellow('Updated package.json with default scripts'))
+
+console.log()
+
+console.log(chalk.green('Success!'))
+
+console.log()
+console.log(chalk.green('Boxes CMS'))
+console.log('---------')
+console.log('1. Run `' + chalk.blue('boxes generateAppKey') + '` to get a randomised app key.')
+console.log('2. Update .env with APP_KEY and APP_PORT, and DB as well if required.')
+console.log('3. Run `' + chalk.blue('npm start') + '` to start the server.')
+console.log('---------')
+console.log()
