@@ -43,6 +43,10 @@ console.log('------------------------')
     dest: ['.env']
   },
   {
+    src: 'editorconfig',
+    dest: ['.editorconfig']
+  },
+  {
     src: 'gulpfile.js',
     dest: ['gulpfile.js']
   },
