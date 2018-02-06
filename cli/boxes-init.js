@@ -47,6 +47,10 @@ console.log('------------------------')
     dest: ['gulpfile.js']
   },
   {
+    src: 'knexfile.js',
+    dest: ['knexfile.js']
+  },
+  {
     src: 'webpack.config.js',
     dest: ['webpack.config.js']
   },
@@ -95,7 +99,10 @@ packageData.scripts = Object.assign({}, {
   'server:start': 'boxes start',
   'server:dev': 'nodemon --watch server --exec "boxes start"',
   build: 'gulp',
-  watch: 'gulp watch'
+  watch: 'gulp watch',
+  'migrate:make': 'knex --knexfile node_modules/boxescms migrate:make',
+  'migrate:latest': 'knex --knexfile node_modules/boxescms migrate:latest',
+  'migrate:rollback': 'knex --knexfile node_modules/boxescms migrate:rollback'
 }, packageData.scripts)
 
 fs.writeFileSync(packageFile, JSON.stringify(packageData, null, 2))
