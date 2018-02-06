@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const localKnexfile = path.join(process.cwd, 'knexfile.js')
 
-const db = require('knex')(require(fs.existsSync(localKnexfile) ? localKnexfile : '../knexfile'))
+const db = require('knex')(require(path.join(process.cwd(), 'knexfile.js')))
 
 module.exports = db
