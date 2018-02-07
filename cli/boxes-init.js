@@ -40,7 +40,7 @@ console.log('------------------------')
 ;[
   {
     src: 'env.example',
-    dest: ['.env']
+    dest: ['.env.example']
   },
   {
     src: 'editorconfig',
