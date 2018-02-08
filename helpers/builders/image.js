@@ -1,11 +1,29 @@
 const base = process.cwd()
-const {join} = require('path')
-const {src, dest} = require('gulp')
+const {join, resolve, relative, dirname, basename} = require('path')
+const {promisify} = require('util')
+const glob = promisify(require('glob'))
+const copyFile = promisify(require('fs').copyFile)
+const imagemin = require('imagemin')
+const imageminJpegtran = require('imagemin-jpegtran')
+const imageminPngquant = require('imagemin-pngquant')
 
-module.exports = () => new Promise((resolve, reject) => {
-  src(join(base, 'web/**/*.{png,jpg,gif,svg}'))
-    .pipe(dest(join(base, 'public')))
-    .on('end', () => {
-      resolve()
-    })
-})
+const buildJpgPng = () => {
+  return imagemin([join(base, 'web/**/*.{jpg,png}')], join(base, 'public'), {
+    plugins: [
+      imageminJpegtran(),
+      imageminPngquant({quality: '65-80'})
+    ]
+  })
+}
+
+const buildRemainingImages = async () => {
+  const files = await glob(join(base, 'web/**/*.{svg,gif,mp4}'))
+
+  return Promise.all(files.map(file => {
+    const relativepath = relative(join(base, 'web'), file)
+
+    return copyFile(file, join(base, 'public', relativepath))
+  }))
+}
+
+module.exports = () => Promise.all([buildJpgPng(), buildRemainingImages()])
