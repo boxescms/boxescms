@@ -5,11 +5,12 @@ const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const {browserslist} = require('./package.json')
 const Dotenv = require('dotenv-webpack')
+const UglifyjsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     publicPath: process.env.WEB_BASE + '/js/'
   },
   module: {
@@ -61,7 +62,8 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
-    })
+    }),
+    new UglifyjsPlugin()
   ],
   resolve: {
     alias: {
