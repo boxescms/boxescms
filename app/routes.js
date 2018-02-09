@@ -7,6 +7,8 @@ const router = express.Router()
 glob.sync(resolve(base, 'server/routes/**/*.js'))
   .map(file => router.use('/', require(file)))
 
-router.use(express.static(join(base, 'public')))
+router.use(express.static(join(base, 'public'), {
+  extensions: ['html']
+}))
 
 module.exports = router
