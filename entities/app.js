@@ -3,8 +3,8 @@ const app = express()
 
 app.use(require('compression')())
 
-app.use('/', require('../api'))
-app.use('/', require('../routes'))
+app.use('/', require('../app/api'))
+app.use('/', require('../app/routes'))
 
 app.use((err, req, res, next) => {
   // TODO: Show error page
