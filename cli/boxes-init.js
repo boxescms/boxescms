@@ -97,12 +97,9 @@ const packageData = require(packageFile)
 packageData.scripts = Object.assign({}, {
   start: 'boxes start',
   'server:start': 'boxes start',
-  'server:dev': 'nodemon --watch server --exec "boxes start"',
-  build: 'gulp',
-  watch: 'gulp watch',
-  'migrate:make': 'knex --knexfile node_modules/boxescms migrate:make',
-  'migrate:latest': 'knex --knexfile node_modules/boxescms migrate:latest',
-  'migrate:rollback': 'knex --knexfile node_modules/boxescms migrate:rollback'
+  'server:dev': 'boxes start dev',
+  build: 'boxes build',
+  watch: 'boxes watch'
 }, packageData.scripts)
 
 fs.writeFileSync(packageFile, JSON.stringify(packageData, null, 2))
@@ -118,7 +115,7 @@ console.log()
 console.log(chalk.green('Boxes CMS'))
 console.log('---------')
 console.log('1. Run `' + chalk.blue('boxes generateAppKey') + '` to get a randomised app key.')
-console.log('2. Update .env with APP_KEY and APP_PORT, and DB as well if required.')
+console.log('2. Update .env with APP_KEY and APP_PORT, and DB as well if required from .env.example.')
 console.log('3. Run `' + chalk.blue('npm start') + '` to start the server.')
 console.log('---------')
 console.log()

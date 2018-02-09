@@ -5,19 +5,26 @@ ExpressJS based API centric CMS.
 # Underlying tools
 
 1. [Express](https://expressjs.com/)
-2. [Gulp](https://gulpjs.com/)
-3. [Sass](http://sass-lang.com/)
-4. [Pug](https://pugjs.org)
-5. [Webpack](https://webpack.js.org/)
-6. [Babel](https://babeljs.io/)
-7. [Bootstrap](https://getbootstrap.com/)
-8. [Vue.js](https://vuejs.org/)
+2. [Sass](http://sass-lang.com/)
+3. [Pug](https://pugjs.org)
+4. [Webpack](https://webpack.js.org/)
+5. [Babel](https://babeljs.io/)
+6. [Bootstrap](https://getbootstrap.com/)
+7. [Vue.js](https://vuejs.org/)
 
-# Structure
+# Folder/File Structure
 
 ## /.env
 
-Env variables. Generate basic one with `boxes file .env`.
+Env variables. Copy from .env.example.
+
+## /app.js (optional)
+
+Optional `app.js` to extend the Express app instantiated from BoxesCMS. Must export a function that receives the app as first argument.
+
+## /data/**/*.js
+
+Data layer for static HTML generation from `/web/pug/**/*.pug`. `**/*` portion must match between `/data` and `/web/pug`. Data must be exported using `module.exports = {}`
 
 ## /server/
 
@@ -25,7 +32,7 @@ Server and node related files.
 
 ### /server/api/
 
-Only API routes. All routes are prepended with `/api`. Routes should be declared using `require('express').Router()`.
+Only API routes. All routes are prepended with `/api`, appended with folder/file relative path. Routes should be declared using `require('express').Router()`.
 
 ### /server/routes/
 
@@ -33,11 +40,11 @@ Additional custom routes.
 
 ## /web/
 
-Web related files (html, pug, css, sass, js, images, fonts).
+Web related files (html, pug, sass, scss, js, images, fonts).
 
 ## /public/
 
-Contents should be ignored. Web files will be compiled here, and served as root static by Node server.
+Web files will be compiled here, and served as root static by Node server.
 
 ## /storage/
 
