@@ -1,3 +1,4 @@
+const base = process.cwd()
 const glob = require('glob')
 const {resolve, relative, join, dirname, basename} = require('path')
 const express = require('express')
@@ -5,14 +6,10 @@ const router = express.Router()
 
 router.use(express.json())
 
-glob.sync(resolve(__dirname, '**/*.js'))
+glob.sync(resolve(base, 'server/api/**/*.js'))
   .map(file => {
-    const relativepath = relative(__dirname, file)
+    const relativepath = relative(join(base, 'server', 'api'), file)
     const apipath = join(dirname(relativepath), basename(relativepath, '.js'))
-
-    if (apipath === 'index') {
-      return
-    }
 
     router.use(`/api/${apipath}`, require(file))
   })
