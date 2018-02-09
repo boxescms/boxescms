@@ -1,11 +1,27 @@
 #!/usr/bin/env node
 
 require('dotenv').config()
+const program = require('commander')
+const chalk = require('chalk')
+const {log} = console
 
-require('../')
+let env = process.env.NODE_ENV
 
-// const gulp = require('../gulpfile')
+program
+  .arguments('[environment]')
+  .action(environment => {
+    env = environment
+  })
+  .parse(process.argv)
 
-// gulp.task('default')(() => {
-//   require('../')
-// })
+;(async () => {
+  await require('../')
+
+  if (env === 'dev' || env === 'development') {
+    log()
+    log(chalk.grey('Development Mode, starting watcher instances'))
+    log()
+
+    require('../helpers/watch.js')()
+  }
+})()

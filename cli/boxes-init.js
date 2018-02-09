@@ -47,10 +47,6 @@ console.log('------------------------')
     dest: ['.editorconfig']
   },
   {
-    src: 'gulpfile.js',
-    dest: ['gulpfile.js']
-  },
-  {
     src: 'knexfile.js',
     dest: ['knexfile.js']
   },
