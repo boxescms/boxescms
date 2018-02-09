@@ -10,6 +10,7 @@ const writeFile = promisify(fs.writeFile)
 const readFile = promisify(fs.readFile)
 const crypto = require('crypto')
 const mkdirp = promisify(require('mkdirp'))
+const chalk = require('chalk')
 
 const buildHashsum = async () => {
   const files = await glob(join(base, 'public', '**/*.{css,js,jpg,png,svg,gif,mp4}'))
@@ -60,15 +61,28 @@ const buildPug = async (file, sums) => {
 }
 
 const builder = async file => {
+  const time = Date.now()
+
   const sums = await buildHashsum()
 
   if (!file) {
     const files = await glob(join(base, 'web/pug/**/*.pug'))
 
-    return Promise.all(files.map(file => buildPug(file, sums)))
+    if (!files.length) {
+      console.log(chalk.grey('Skipping PUG - No files to compile'))
+      return
+    }
+
+    await Promise.all(files.map(file => buildPug(file, sums)))
+
+    console.log(`Compiled ${chalk.yellow('PUG')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
+
+    return
   }
 
-  return buildPug(file, sums)
+  await buildPug(file, sums)
+
+  console.log(`Compiled ${chalk.yellow('PUG')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
 }
 
 module.exports = builder

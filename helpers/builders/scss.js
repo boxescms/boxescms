@@ -14,10 +14,10 @@ const builder = async file => {
   const time = Date.now()
 
   if (!file) {
-    const files = await glob(join(base, 'web/sass/**/*.sass'))
+    const files = await glob(join(base, 'web/scss/**/*.scss'))
 
     if (!files.length) {
-      console.log(chalk.grey('Skipping SASS - No files to compile'))
+      console.log(chalk.grey('Skipping SCSS - No files to compile'))
       return
     }
 
@@ -25,9 +25,9 @@ const builder = async file => {
   }
 
   const fullpath = resolve(base, file)
-  const relativepath = relative(join(base, 'web', 'sass'), fullpath)
+  const relativepath = relative(join(base, 'web', 'scss'), fullpath)
   const dir = dirname(relativepath)
-  const filename = basename(relativepath, '.sass')
+  const filename = basename(relativepath, '.scss')
   const target = join(base, 'public', 'css', dir, `${filename}.css`)
 
   const sassResult = await sass({
@@ -43,7 +43,7 @@ const builder = async file => {
 
   await writeFile(target, autoprefixResult.css)
 
-  console.log(`Compiled ${chalk.yellow('SASS')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
+  console.log(`Compiled ${chalk.yellow('SCSS')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
 }
 
 module.exports = builder

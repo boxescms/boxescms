@@ -5,6 +5,7 @@ const fs = require('fs')
 const glob = promisify(require('glob'))
 const mkdirp = promisify(require('mkdirp'))
 const webpack = require('webpack')
+const chalk = require('chalk')
 
 const userWebpackFile = join(base, 'webpack.config.js')
 const hasUserWebpackFile = fs.existsSync(userWebpackFile)
@@ -14,7 +15,14 @@ const webpackFile = hasUserWebpackFile ? userWebpackFile : resolve(__dirname, '.
 const webpackConfig = require(webpackFile)
 
 const builder = async () => {
+  const time = Date.now()
+
   const files = await glob(join(base, 'web/js/**/*.js'))
+
+  if (!files.length) {
+    console.log(chalk.grey('Skipping JS - No files to compile'))
+    return
+  }
 
   const entry = files.reduce((entries, file) => {
     const filename = basename(file, '.js')
@@ -47,6 +55,8 @@ const builder = async () => {
   } catch (err) {
     console.error(err)
   }
+
+  console.log(`Compiled ${chalk.yellow('JS')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
 }
 
 module.exports = builder
