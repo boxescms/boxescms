@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.1] - 2018-02-09
+### Changed
+- Updated README
+- Updated `boxes init` to set default package.scripts.{build,watch} to `boxes build` and `boxes watch` instead of Gulp
+- Removed `knex` related scripts from package.scripts
+
 ## [0.1.0] - 2018-02-09
 ### Added
 - Frontend build and watch (pug, js, sass, scss, png, jpg)
