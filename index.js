@@ -1,16 +1,29 @@
 require('./helpers/checkIsProjectFolder')
 require('dotenv').config()
 
+const base = process.cwd()
+const chalk = require('chalk')
 const fs = require('fs')
-const path = require('path')
+const {join} = require('path')
 const http = require('http')
+const {log} = console
 
 const app = require('./entities/app')
-const userApp = path.join(process.cwd(), 'app.js')
+const userApp = join(base, 'app.js')
+const {name, version} = require(join(base, 'package.json'))
+
+log()
+log(chalk.blue(name) + ' ' + chalk.yellow(`[v${version}]`))
+log(chalk.blue(new Array(name.length + version.toString().length + 4).fill('-').join('')))
+log()
 
 module.exports = (async () => {
   if (fs.existsSync(userApp)) {
     await Promise.resolve(require(userApp)(app))
+  }
+
+  if (!process.env.APP_PORT) {
+    return log(chalk.red('APP_PORT must be defined to start a server.'))
   }
 
   const server = http.createServer(app)

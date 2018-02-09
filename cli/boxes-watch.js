@@ -4,7 +4,7 @@ const program = require('commander')
 const glob = require('glob')
 const chalk = require('chalk')
 const {basename, resolve} = require('path')
-const allowedTypes = glob.sync(resolve(__dirname, '../helpers/builders/*.js')).map(item => basename(item, '.js'))
+const allowedTypes = glob.sync(resolve(__dirname, '../helpers/watchers/*.js')).map(item => basename(item, '.js'))
 
 let inputtypes
 
@@ -17,7 +17,7 @@ program
 
 ;(async () => {
   if (!inputtypes) {
-    return require('../helpers/build')()
+    return require('../helpers/watch')()
   }
 
   for (let i = 0; i < inputtypes.length; i++) {
@@ -28,6 +28,6 @@ program
       continue
     }
 
-    await require(`../helpers/builders/${type}`)()
+    require(`../helpers/watchers/${type}`)()
   }
 })()

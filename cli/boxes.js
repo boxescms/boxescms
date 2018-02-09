@@ -9,6 +9,7 @@ program
   .version(`APP: ${appversion}, CMS: ${version}`)
   .command('init', 'Initialise')
   .command('generateAppKey', 'Generate app key')
-  .command('build', 'Build static pages')
+  .command('build', 'Build static pages and assets')
+  .command('watch', 'Watch and build file changes for development')
   .command('start', 'Start app server')
   .parse(process.argv)

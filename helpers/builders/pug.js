@@ -44,6 +44,7 @@ const buildPug = async (file, sums) => {
   let data = {}
 
   if (fs.existsSync(datafile)) {
+    delete require.cache[datafile]
     Object.assign(data, require(datafile))
   }
 
