@@ -15,13 +15,13 @@ program
   .parse(process.argv)
 
 ;(async () => {
-  await require('../')
-
   if (env === 'dev' || env === 'development') {
     log()
     log(chalk.grey('Development Mode, starting watcher instances'))
     log()
 
-    require('../helpers/watch.js')()
+    return require('../helpers/watch.js')()
   }
+
+  await require('../')
 })()
