@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.2] - 2018-02-09
+### Added
+- Server watcher for dev mode
+
 ## [0.1.1] - 2018-02-09
 ### Changed
 - Updated README
