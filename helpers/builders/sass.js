@@ -17,7 +17,7 @@ const builder = async file => {
   }
 
   const fullpath = resolve(base, file)
-  const relativepath = relative(join(base, 'web/sass'), fullpath)
+  const relativepath = relative(join(base, 'web', 'sass'), fullpath)
   const dir = dirname(relativepath)
   const filename = basename(relativepath, '.sass')
   const target = join(base, 'public', 'css', dir, `${filename}.css`)
@@ -31,7 +31,7 @@ const builder = async file => {
     browsers: browserslist
   })]).process(sassResult.css.toString())
 
-  await mkdirp(join(base, 'public', 'css', dir))
+  await mkdirp(dirname(target))
 
   return writeFile(target, autoprefixResult.css)
 }

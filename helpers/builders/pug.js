@@ -54,7 +54,7 @@ const buildPug = async (file, sums) => {
     html = html.replace(new RegExp(file, 'g'), `${file}?${sum}`)
   })
 
-  await mkdirp(join(base, 'public', dir))
+  await mkdirp(dirname(target))
 
   return writeFile(target, html)
 }
