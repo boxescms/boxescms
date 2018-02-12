@@ -24,4 +24,6 @@ program
   }
 
   await require('../')
+
+  await require('../admin')
 })()

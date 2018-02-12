@@ -30,7 +30,8 @@ module.exports = (async () => {
 
   await new Promise(resolve => server.listen(process.env.APP_PORT, resolve))
 
-  console.info(`App listening on port ${process.env.APP_PORT}`)
+  log()
+  log(`App listening on port ${chalk.blue(process.env.APP_PORT)}`)
 
   return server
 })()
