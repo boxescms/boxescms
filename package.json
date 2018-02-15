@@ -9,6 +9,10 @@
   "bin": {
     "boxes": "./cli/boxes.js"
   },
+  "scripts": {
+    "build": "node helpers/build",
+    "watch": "node helpers/watch"
+  },
   "browserslist": [
     "last 2 versions",
     "last 10 Chrome versions",

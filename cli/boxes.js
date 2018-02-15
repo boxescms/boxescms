@@ -11,5 +11,6 @@ program
   .command('generateAppKey', 'Generate app key')
   .command('build', 'Build static pages and assets')
   .command('watch', 'Watch and build file changes for development')
+  .command('admin', 'Create an admin user')
   .command('start', 'Start app server')
   .parse(process.argv)

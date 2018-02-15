@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.3]
+### Fixed
+- Wrong variable type on knexfile pool
+
 ## [0.1.2] - 2018-02-09
 ### Added
 - Server watcher for dev mode

@@ -1,4 +1,3 @@
-require('./helpers/checkIsProjectFolder')
 require('dotenv').config()
 
 const base = process.cwd()

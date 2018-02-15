@@ -73,7 +73,8 @@ router.put('/',
     await Admin.create({
       username: req.body.username,
       password: hashedPassword,
-      salt
+      salt,
+      created: Date.now()
     })
 
     res.json({

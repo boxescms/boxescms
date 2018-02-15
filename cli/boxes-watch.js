@@ -17,7 +17,7 @@ program
 
 ;(async () => {
   if (!inputtypes) {
-    return require('../helpers/watch')()
+    return require('../helpers/watch')
   }
 
   for (let i = 0; i < inputtypes.length; i++) {

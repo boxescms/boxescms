@@ -6,10 +6,8 @@ const watchers = glob.sync(join(__dirname, 'watchers/*.js')).reduce((items, file
   return items
 }, {})
 
-module.exports = () => {
-  return Object.keys(watchers)
-    .reduce((result, type) => {
-      result[type] = watchers[type]()
-      return result
-    }, {})
-}
+module.exports = Object.keys(watchers)
+  .reduce((result, type) => {
+    result[type] = watchers[type]()
+    return result
+  }, {})
