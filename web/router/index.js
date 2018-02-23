@@ -3,7 +3,6 @@ import Router from 'router'
 
 import index from '../vue/index.vue'
 import login from '../vue/login.vue'
-import pages from '../vue/pages.vue'
 import page from '../vue/page.vue'
 
 Vue.use(Router)
@@ -25,13 +24,6 @@ const router = new Router({
       name: 'index',
       components: {
         default: index
-      }
-    },
-    {
-      path: '/pages',
-      name: 'pages',
-      components: {
-        default: pages
       }
     },
     {
