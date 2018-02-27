@@ -9,7 +9,7 @@ export default {
   name: 'index',
   async created () {
     console.log('here')
-    const pages = await api('admin/pages')
+    const pages = await api.get('admin/pages')
   }
 }
 </script>

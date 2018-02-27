@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "node helpers/build",
-    "watch": "node helpers/watch"
+    "watch": "node helpers/watch",
+    "server:dev": "nodemon -w api admin.js"
   },
   "browserslist": [
     "last 2 versions",

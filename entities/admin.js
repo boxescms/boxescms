@@ -1,12 +1,12 @@
 const express = require('express')
 const app = express()
-const {join} = require('path')
+const {resolve} = require('path')
 
 app.use(require('compression')())
 
 app.use('/', require('../api'))
 
-app.use(express.static(join(__dirname, 'public'), {
+app.use('/', express.static(resolve(__dirname, '../public'), {
   extensions: ['html']
 }))
 
