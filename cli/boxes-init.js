@@ -55,10 +55,6 @@ console.log('------------------------')
     dest: ['webpack.config.js']
   },
   {
-    src: 'webpack.production.js',
-    dest: ['webpack.production.js']
-  },
-  {
     src: 'project.gitignore',
     dest: ['.gitignore']
   },
