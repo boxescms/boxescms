@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0]
+### Notes
+- Delete `webpack.config.js` and `webpack.production.js`, then re-run `boxes init` for existing upgrades
+
+### Changed
+- Updated Webpack to v4
+- Updated dotenv to v5
+- Updated normalize.css to v8
+- Updated StandardJS to v11
+- Updated all packages minor/patch version
+
 ## [0.1.3]
 ### Fixed
 - Wrong variable type on knexfile pool
