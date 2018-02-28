@@ -1,10 +1,18 @@
 # Changelog
 
-## [0.2.1]
+## [0.2.3] - 2018-02-28
+### Changed
+- Fixed webpack configuration to build to public path
+
+## [0.2.2] - 2018-02-28
+### Changed
+- Fixed deploy to npm to include project files
+
+## [0.2.1] - 2018-02-28
 ### Changed
 - Include lock files
 
-## [0.2.0]
+## [0.2.0] - 2018-02-28
 ### Notes
 - Delete `webpack.config.js` and `webpack.production.js`, then re-run `boxes init` for existing upgrades
 
@@ -15,7 +23,7 @@
 - Updated StandardJS to v11
 - Updated all packages minor/patch version
 
-## [0.1.3]
+## [0.1.3] - 2018-02-28
 ### Fixed
 - Wrong variable type on knexfile pool
 - Server watcher on dev to including files properly
