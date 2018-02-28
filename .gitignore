@@ -1,3 +1,6 @@
+# Custom storage folder
+storage/
+
 # .env file
 .env
 
