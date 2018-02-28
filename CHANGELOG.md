@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.1]
+### Changed
+- Include lock files
+
 ## [0.2.0]
 ### Notes
 - Delete `webpack.config.js` and `webpack.production.js`, then re-run `boxes init` for existing upgrades
