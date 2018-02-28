@@ -16,8 +16,6 @@ hashsum.json
 bower_components/
 node_modules/
 vendor/
-package-lock.json
-yarn.lock
 
 # Logs
 logs/
