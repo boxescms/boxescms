@@ -1,6 +1,6 @@
 {
   "name": "boxescms",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "ExpressJS based API centric CMS.",
   "main": "index.js",
   "repository": "git@github.com:boxescms/boxescms.git",
