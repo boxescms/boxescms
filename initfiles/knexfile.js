@@ -10,8 +10,8 @@ module.exports = {
     charset: process.env.DB_CHARSET || 'utf8mb4'
   },
   pool: {
-    min: process.env.DB_POOL_MIN || 2,
-    max: process.env.DB_POOL_MAX || 10
+    min: parseInt(process.env.DB_POOL_MIN) || 2,
+    max: parseInt(process.env.DB_POOL_MAX) || 10
   },
   migrations: {
     tableName: process.env.DB_MIGRATION_TABLENAME || '_migrations'

@@ -20,8 +20,10 @@ program
     log(chalk.grey('Development Mode, starting watcher instances'))
     log()
 
-    return require('../helpers/watch.js')()
+    return require('../helpers/watch')
   }
 
   await require('../')
+
+  await require('../admin')
 })()

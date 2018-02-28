@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.3]
+### Fixed
+- Wrong variable type on knexfile pool
+- Server watcher on dev to including files properly
+
+### Added
+- Add .editorconfig on init
+- WIP Admin Server
+
 ## [0.1.2] - 2018-02-09
 ### Added
 - Server watcher for dev mode

@@ -17,7 +17,7 @@ program
 
 ;(async () => {
   if (!inputtypes) {
-    return require('../helpers/build')()
+    return require('../helpers/build')
   }
 
   for (let i = 0; i < inputtypes.length; i++) {
