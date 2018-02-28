@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "node helpers/build",
-    "watch": "node helpers/watch",
+    "watch": "node cli/boxes-watch js sass pug",
     "server:dev": "nodemon -w api admin.js"
   },
   "browserslist": [
@@ -33,6 +33,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "bootstrap": "^4.0.0",
+    "bulma": "^0.6.2",
     "chalk": "^2.3.0",
     "chokidar": "^2.0.1",
     "commander": "^2.13.0",
