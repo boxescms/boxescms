@@ -11,6 +11,8 @@ const readFile = promisify(fs.readFile)
 const crypto = require('crypto')
 const mkdirp = promisify(require('mkdirp'))
 const chalk = require('chalk')
+const mergeWith = require('lodash/mergeWith')
+const yml = require('js-yaml')
 
 const buildHashsum = async () => {
   const files = await glob(join(base, 'public', '**/*.{css,js,jpg,png,svg,gif,mp4}'))
@@ -40,12 +42,30 @@ const buildPug = async (file, sums) => {
   const filename = basename(relativepath, '.pug')
   const target = join(base, 'public', dir, `${filename}.html`)
   const datafile = join(base, 'data', dir, `${filename}.js`)
+  const globalfile = join(base, 'data', 'global.js')
+  const datayml = join(base, 'data', dir, `${filename}.yml`)
+  const globalyml = join(base, 'data', 'global.yml')
 
-  let data = {}
+  const data = {}
+
+  if (fs.existsSync(globalfile)) {
+    delete require.cache[globalfile]
+    mergeWith(data, require(globalfile), (obj, src) => src)
+  }
+
+  if (fs.existsSync(globalyml)) {
+    const globalymldata = await readFile(globalyml)
+    mergeWith(data, yml.load(globalymldata))
+  }
 
   if (fs.existsSync(datafile)) {
     delete require.cache[datafile]
-    Object.assign(data, require(datafile))
+    mergeWith(data, require(datafile), (obj, src) => src)
+  }
+
+  if (fs.existsSync(datayml)) {
+    const dataymldata = await readFile(datayml)
+    mergeWith(data, yml.load(dataymldata))
   }
 
   let html = pug.renderFile(fullpath, data)
