@@ -4,11 +4,11 @@ const builder = require('../builders/pug')
 const chalk = require('chalk')
 
 module.exports = () => {
-  console.log(chalk.blue('Watching PUG ') + chalk.yellow('[web/pug/**/*.pug, data @ data/**/*.js]'))
+  console.log(chalk.blue('Watching PUG ') + chalk.yellow('[web/pug/**/*.pug, data @ data/**/*.{js,yml}]'))
 
   const watcher = chokidar.watch([
     'web/**/*.pug',
-    'data/**/*.js'
+    'data/**/*.{js,yml}'
   ], {
     cwd: base
   })
