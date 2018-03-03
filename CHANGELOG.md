@@ -1,9 +1,14 @@
 # Changelog
 
+## [0.4.0] - 2018-03-04
+### Added
+- JSON data support @ `data/**/*.json`
+- Custom template support in data file with `.template` key basing from `web/template`
+
 ## [0.3.0] - 2018-03-01
 ### Added
-- Global data with data/global.js
-- YML data support @ data/**/*.yml
+- Global data with `data/global.js`
+- YML data support @ `data/**/*.yml`
 
 ## [0.2.3] - 2018-02-28
 ### Changed
