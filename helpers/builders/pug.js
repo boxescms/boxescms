@@ -41,31 +41,46 @@ const buildPug = async (file, sums) => {
   const dir = dirname(relativepath)
   const filename = basename(relativepath, '.pug')
   const target = join(base, 'public', dir, `${filename}.html`)
-  const datafile = join(base, 'data', dir, `${filename}.js`)
-  const globalfile = join(base, 'data', 'global.js')
-  const datayml = join(base, 'data', dir, `${filename}.yml`)
-  const globalyml = join(base, 'data', 'global.yml')
+
+  const datafileJS = join(base, 'data', dir, `${filename}.js`)
+  const globalfileJS = join(base, 'data', 'global.js')
+
+  const datafileJSON = join(base, 'data', dir, `${filename}.json`)
+  const globalfileJSON = join(base, 'data', 'global.json')
+
+  const datafileYML = join(base, 'data', dir, `${filename}.yml`)
+  const globalfileYML = join(base, 'data', 'global.yml')
 
   const data = {}
 
-  if (fs.existsSync(globalfile)) {
-    delete require.cache[globalfile]
-    mergeWith(data, require(globalfile), (obj, src) => src)
+  if (fs.existsSync(globalfileJS)) {
+    delete require.cache[globalfileJS]
+    mergeWith(data, require(globalfileJS), (obj, src) => src)
   }
 
-  if (fs.existsSync(globalyml)) {
-    const globalymldata = await readFile(globalyml)
-    mergeWith(data, yml.load(globalymldata))
+  if (fs.existsSync(globalfileJSON)) {
+    delete require.cache[globalfileJSON]
+    mergeWith(data, require(globalfileJSON), (obj, src) => src)
   }
 
-  if (fs.existsSync(datafile)) {
-    delete require.cache[datafile]
-    mergeWith(data, require(datafile), (obj, src) => src)
+  if (fs.existsSync(globalfileYML)) {
+    const globalYML = await readFile(globalfileYML)
+    mergeWith(data, yml.load(globalYML))
   }
 
-  if (fs.existsSync(datayml)) {
-    const dataymldata = await readFile(datayml)
-    mergeWith(data, yml.load(dataymldata))
+  if (fs.existsSync(datafileJS)) {
+    delete require.cache[datafileJS]
+    mergeWith(data, require(datafileJS), (obj, src) => src)
+  }
+
+  if (fs.existsSync(datafileJSON)) {
+    delete require.cache[datafileJSON]
+    mergeWith(data, require(datafileJSON), (obj, src) => src)
+  }
+
+  if (fs.existsSync(datafileYML)) {
+    const dataYML = await readFile(datafileYML)
+    mergeWith(data, yml.load(dataYML))
   }
 
   let html = pug.renderFile(fullpath, data)

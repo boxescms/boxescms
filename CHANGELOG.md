@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.1]
+### Added
+- JSON data support @ data/**/*.json
+
 ## [0.3.0] - 2018-03-01
 ### Added
 - Global data with data/global.js
