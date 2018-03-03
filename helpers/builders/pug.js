@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const base = process.cwd()
 const {promisify} = require('util')
-const {join, resolve, relative, dirname, basename} = require('path')
+const {join, resolve, relative, dirname, basename, extname} = require('path')
 const fs = require('fs')
 const pug = require('pug')
 const glob = promisify(require('glob'))
@@ -31,27 +31,17 @@ const buildHashsum = async () => {
   return sums
 }
 
-const buildPug = async (file, sums) => {
-  if (sums === undefined) {
-    sums = await buildHashsum()
-  }
+const getData = async namespace => {
+  const data = {}
 
-  const fullpath = resolve(base, file)
-  const relativepath = relative(join(base, 'web', 'pug'), fullpath)
-  const dir = dirname(relativepath)
-  const filename = basename(relativepath, '.pug')
-  const target = join(base, 'public', dir, `${filename}.html`)
-
-  const datafileJS = join(base, 'data', dir, `${filename}.js`)
+  const datafileJS = join(base, 'data', `${namespace}.js`)
   const globalfileJS = join(base, 'data', 'global.js')
 
-  const datafileJSON = join(base, 'data', dir, `${filename}.json`)
+  const datafileJSON = join(base, 'data', `${namespace}.json`)
   const globalfileJSON = join(base, 'data', 'global.json')
 
-  const datafileYML = join(base, 'data', dir, `${filename}.yml`)
+  const datafileYML = join(base, 'data', `${namespace}.yml`)
   const globalfileYML = join(base, 'data', 'global.yml')
-
-  const data = {}
 
   if (fs.existsSync(globalfileJS)) {
     delete require.cache[globalfileJS]
@@ -83,7 +73,11 @@ const buildPug = async (file, sums) => {
     mergeWith(data, yml.load(dataYML))
   }
 
-  let html = pug.renderFile(fullpath, data)
+  return data
+}
+
+const generateHTML = async (template, target, data, sums) => {
+  let html = pug.renderFile(template, data)
 
   Object.keys(sums).map(file => {
     const sum = sums[file]
@@ -96,6 +90,42 @@ const buildPug = async (file, sums) => {
   return writeFile(target, html)
 }
 
+const buildPug = async (file, sums) => {
+  if (sums === undefined) {
+    sums = await buildHashsum()
+  }
+
+  const fullpath = resolve(base, file)
+  const relativepath = relative(join(base, 'web', 'pug'), fullpath)
+  const dir = dirname(relativepath)
+  const filename = basename(relativepath, '.pug')
+  const target = join(base, 'public', dir, `${filename}.html`)
+
+  const data = await getData(join(dir, filename))
+
+  return generateHTML(fullpath, target, data, sums)
+}
+
+const buildFromData = async (relativepath, sums) => {
+  if (sums === undefined) {
+    sums = await buildHashsum()
+  }
+
+  const data = await getData(relativepath)
+
+  if (!data['.template']) {
+    return
+  }
+
+  const templateFile = join(base, 'web/template', data['.template'])
+
+  if (!fs.existsSync(templateFile)) {
+    return
+  }
+
+  return generateHTML(templateFile, join(base, 'public', relativepath + '.html'), data, sums)
+}
+
 const builder = async file => {
   const time = Date.now()
 
@@ -104,12 +134,25 @@ const builder = async file => {
   if (!file) {
     const files = await glob(join(base, 'web/pug/**/*.pug'))
 
-    if (!files.length) {
+    const datafiles = await glob(join(base, 'data/**/*.{js,json,yml}'))
+
+    if (!files.length && !datafiles.length) {
       console.log(chalk.grey('Skipping PUG - No files to compile'))
       return
     }
 
     await Promise.all(files.map(file => buildPug(file, sums)))
+
+    const relativefiles = files
+      .map(file => relative(join(base, 'web/pug'), file))
+      .map(file => join(dirname(file), basename(file, extname(file))))
+
+    const relativedatafiles = [...new Set(datafiles
+      .map(file => relative(join(base, 'data'), file))
+      .map(file => join(dirname(file), basename(file, extname(file))))
+      .filter(file => !relativefiles.includes(file)))]
+
+    await Promise.all(relativedatafiles.map(file => buildFromData(file, sums)))
 
     console.log(`Compiled ${chalk.yellow('PUG')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
 
