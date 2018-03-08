@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.1] - 2018-03-08
+### Fixed
+- Static path to serve from web folder directly
+
 ## [0.5.0] - 2018-03-08
 ### Added
 - Static assets support @ `web/static/**/*` to `public/static`

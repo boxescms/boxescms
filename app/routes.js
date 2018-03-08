@@ -10,6 +10,6 @@ glob.sync(resolve(base, 'server/routes/**/*.js'))
 router.use(express.static(join(base, 'public'), {
   extensions: ['html']
 }))
-router.use('/static', express.static(join(base, 'static')))
+router.use('/static', express.static(join(base, 'web/static')))
 
 module.exports = router
