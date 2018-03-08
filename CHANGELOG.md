@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.0] - 2018-03-08
+### Added
+- Static assets support @ `web/static/**/*` to `public/static`
+
 ## [0.4.0] - 2018-03-04
 ### Added
 - JSON data support @ `data/**/*.json`
