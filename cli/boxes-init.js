@@ -65,10 +65,6 @@ console.log('------------------------')
   {
     src: 'nginx.conf',
     dest: ['conf/nginx/app.conf']
-  },
-  {
-    src: 'index.js',
-    dest: ['index.js']
   }
 ]
   .map(item => {

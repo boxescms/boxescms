@@ -2,6 +2,7 @@ const base = process.cwd()
 const chokidar = require('chokidar')
 const chalk = require('chalk')
 const {spawn} = require('child_process')
+const {existsSync} = require('fs')
 
 let server
 
@@ -10,7 +11,9 @@ const devServer = () => {
     server.kill()
   }
 
-  server = spawn('node', ['index.js'], {
+  const indexfile = existsSync('node_modules/boxescms/index.js') ? 'node_modules/boxescms/index.js' : 'index.js'
+
+  server = spawn('node', [indexfile], {
     stdio: 'inherit'
   })
 }

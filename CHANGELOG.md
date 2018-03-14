@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.2] - 2018-03-14
+### Fixed
+- Remove unnecessary `index.js` from `boxes init`
+- Server start to use `index.js` from package
+
 ## [0.5.1] - 2018-03-08
 ### Fixed
 - Static path to serve from web folder directly
