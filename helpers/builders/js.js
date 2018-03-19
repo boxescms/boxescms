@@ -1,5 +1,5 @@
 const base = process.cwd()
-const {join, resolve, basename} = require('path')
+const {join, resolve, basename, relative} = require('path')
 const {promisify} = require('util')
 const fs = require('fs')
 const glob = promisify(require('glob'))
@@ -14,10 +14,12 @@ const webpackFile = hasUserWebpackFile ? userWebpackFile : resolve(__dirname, '.
 
 const webpackConfig = require(webpackFile)
 
+const basejspath = join(base, 'web/js')
+
 const builder = async () => {
   const time = Date.now()
 
-  const files = await glob(join(base, 'web/js/**/*.js'))
+  const files = await glob(join(basejspath, '**/*.js'))
 
   if (!files.length) {
     console.log(chalk.grey('Skipping JS - No files to compile'))
@@ -25,7 +27,7 @@ const builder = async () => {
   }
 
   const entry = files.reduce((entries, file) => {
-    const filename = basename(file, '.js')
+    const filename = relative(basejspath, file).slice(0, -3)
 
     entries[filename] = file
 
