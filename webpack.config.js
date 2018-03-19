@@ -4,12 +4,13 @@ const path = require('path')
 const autoprefixer = require('autoprefixer')
 const {browserslist} = require('./package.json')
 const Dotenv = require('dotenv-webpack')
+const base = process.cwd()
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   output: {
     filename: '[name].js',
-    path: path.resolve(process.cwd(), 'public/js'),
+    path: path.resolve(base, 'public/js'),
     publicPath: process.env.WEB_BASE + '/js/'
   },
   module: {
@@ -17,7 +18,7 @@ module.exports = {
       {
         test: /\.js?$/,
         include: [
-          path.resolve(__dirname, 'web')
+          path.resolve(base, 'web')
         ],
         loader: 'babel-loader',
         options: {
@@ -31,7 +32,7 @@ module.exports = {
       {
         test: /\.vue?$/,
         include: [
-          path.resolve(__dirname, 'web')
+          path.resolve(base, 'web')
         ],
         loader: 'vue-loader',
         options: {
@@ -57,18 +58,19 @@ module.exports = {
   },
   plugins: [
     new Dotenv({
-      path: './.env'
+      path: path.join(base, '.env')
     })
   ],
   resolve: {
     alias: {
-      vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js'),
-      router$: path.resolve(__dirname, 'node_modules/vue-router/dist/vue-router.esm.js')
+      vue$: path.resolve(base, 'node_modules/vue/dist/vue.esm.js'),
+      router$: path.resolve(base, 'node_modules/vue-router/dist/vue-router.esm.js')
     }
   },
   optimization: {
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      name: 'vendor'
     }
   }
 }

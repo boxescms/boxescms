@@ -22,9 +22,12 @@ module.exports = async () => {
     const target = join(base, 'public/static', relativepath)
     const dir = dirname(target)
 
-    await mkdirp(dir)
-
-    return copyFile(file, join(base, 'public/static', relativepath))
+    try {
+      await mkdirp(dir)
+      await copyFile(file, join(base, 'public/static', relativepath))
+    } catch (err) {
+      console.log(chalk.red(err.message))
+    }
   }))
 
   console.log(`Processed ${chalk.yellow('Statics')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)

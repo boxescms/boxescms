@@ -51,10 +51,6 @@ console.log('------------------------')
     dest: ['knexfile.js']
   },
   {
-    src: 'webpack.config.js',
-    dest: ['webpack.config.js']
-  },
-  {
     src: 'project.gitignore',
     dest: ['.gitignore']
   },
