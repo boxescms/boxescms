@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.3] - 2018-03-19
+### Fixed
+- Remove `webpack.config.js` requirement on base project
+- Vue file watch path changed to `web/**/*.vue`
+- JS file build supports folders
+- Catch static build error to prevent possible errors
+
+### Changed
+- Remove `webpack.config.js` from `boxes init`
+
 ## [0.5.2] - 2018-03-14
 ### Fixed
 - Remove unnecessary `index.js` from `boxes init`
