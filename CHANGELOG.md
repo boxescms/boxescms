@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.4] - 2018-03-20
+### Fixed
+- Use random free port for App and Admin if not defined
+
 ## [0.5.3] - 2018-03-19
 ### Fixed
 - Remove `webpack.config.js` requirement on base project
