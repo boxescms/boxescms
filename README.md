@@ -1,55 +1,64 @@
 # boxescms
 
-ExpressJS based API centric CMS.
+ExpressJS based API centric static site CMS.
 
-# Underlying tools
+## Underlying tools
 
-1. [Express](https://expressjs.com/)
-2. [Sass](http://sass-lang.com/)
-3. [Pug](https://pugjs.org)
-4. [Webpack](https://webpack.js.org/)
-5. [Babel](https://babeljs.io/)
-6. [Bootstrap](https://getbootstrap.com/)
-7. [Vue.js](https://vuejs.org/)
+* [Express](https://expressjs.com/)
+* [Sass](http://sass-lang.com/)
+* [Pug](https://pugjs.org)
+* [Webpack](https://webpack.js.org/)
+* [Babel](https://babeljs.io/)
+* [Vue.js](https://vuejs.org/)
 
-# Folder/File Structure
+## Kickstart Development
 
-## /.env
+1. `npm init` (If you haven't already)
+
+2. `npm install boxescms`
+
+3. `npx boxes init`
+
+4. `npm start dev`
+
+## Folder/File Structure
+
+### /.env
 
 Env variables. Copy from .env.example.
 
-## /app.js (optional)
+### /app.js (optional)
 
 Optional `app.js` to extend the Express app instantiated from BoxesCMS. Must export a function that receives the app as first argument.
 
-## /data/**/*.js
+### /data/**/*.{js,json,yml}
 
-Data layer for static HTML generation from `/web/pug/**/*.pug`. `**/*` portion must match between `/data` and `/web/pug`. Data must be exported using `module.exports = {}`
+Data layer for static HTML generation from `/web/pug/**/*.pug`. `**/*` must match between the relative path of `/data` and `/web/pug`. See [Template Data](#template-data) section for more details.
 
-## /server/
+### /server/
 
 Server and node related files.
 
-### /server/api/
+#### /server/api/
 
 Only API routes. All routes are prepended with `/api`, appended with folder/file relative path. Routes should be declared using `require('express').Router()`.
 
-### /server/routes/
+#### /server/routes/
 
 Additional custom routes.
 
-## /web/
+### /web/
 
-Web related files (html, pug, sass, scss, js, images, fonts).
+Web related files (html, pug, sass, scss, js, images, statics).
 
-## /public/
+### /public/
 
 Web files will be compiled here, and served as root static by Node server.
 
-## /storage/
+### /storage/
 
 Contents should be ignored. Storage folder for various runtime data usage.
 
-## /conf/
+### /conf/
 
 External configuration files.

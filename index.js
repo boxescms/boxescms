@@ -6,6 +6,7 @@ const fs = require('fs')
 const {join} = require('path')
 const http = require('http')
 const {log} = console
+const getPort = require('get-port')
 
 const app = require('./entities/app')
 const userApp = join(base, 'app.js')
@@ -22,7 +23,8 @@ module.exports = (async () => {
   }
 
   if (!process.env.APP_PORT) {
-    return log(chalk.red('APP_PORT must be defined to start a server.'))
+    process.env.APP_PORT = await getPort()
+    log(chalk.red(`APP_PORT not defined. Using port ${process.env.APP_PORT}.`))
   }
 
   const server = http.createServer(app)
