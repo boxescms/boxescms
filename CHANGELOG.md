@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.5] - 2018-03-21
+### Fixed
+- JS file watch path changed to `web/**/*.js`
+
 ## [0.5.4] - 2018-03-20
 ### Fixed
 - Use random free port for App and Admin if not defined
