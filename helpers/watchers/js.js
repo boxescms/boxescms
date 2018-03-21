@@ -4,10 +4,10 @@ const builder = require('../builders/js')
 const chalk = require('chalk')
 
 module.exports = () => {
-  console.log(chalk.blue('Watching JS ') + chalk.yellow('[web/{js}/**/*.{js,vue}]'))
+  console.log(chalk.blue('Watching JS ') + chalk.yellow('[web/**/*.{js,vue}]'))
 
   const watcher = chokidar.watch([
-    'web/js/**/*.js',
+    'web/**/*.js',
     'web/**/*.vue'
   ], {
     cwd: base
