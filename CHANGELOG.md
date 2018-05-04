@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.5] - 2018-05-04
+### Fixed
+- Set devtool for development build
+- Invalid targets in webpack configuration for browserslist
+
+### Updated
+- Update all dependencies version
+
 ## [0.5.5] - 2018-03-21
 ### Fixed
 - JS file watch path changed to `web/**/*.js`
