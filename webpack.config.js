@@ -76,5 +76,6 @@ module.exports = {
       chunks: 'all',
       name: 'vendor'
     }
-  }
+  },
+  devtool: process.env.WEB_BASE === 'production' ? false : 'cheap-eval-source-map '
 }
