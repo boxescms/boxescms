@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.5.5] - 2018-05-04
+## [0.5.6] - 2018-05-04
 ### Fixed
 - Set devtool for development build
 - Invalid targets in webpack configuration for browserslist
