@@ -24,7 +24,9 @@ module.exports = {
         options: {
           presets: [
             ['env', {
-              browsers: browserslist
+              targets: {
+                browsers: browserslist
+              }
             }]
           ]
         }
@@ -42,7 +44,9 @@ module.exports = {
               options: {
                 presets: [
                   ['env', {
-                    browsers: browserslist
+                    targets: {
+                      browsers: browserslist
+                    }
                   }]
                 ]
               }
