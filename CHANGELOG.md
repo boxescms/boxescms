@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.7] - 2018-05-11
+### Fixed
+- Temporary downgrade vue-loader to v14 (https://vue-loader.vuejs.org/migrating.html)
+
 ## [0.5.6] - 2018-05-04
 ### Fixed
 - Set devtool for development build
