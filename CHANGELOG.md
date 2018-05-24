@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.9] - 2018-05-24
+### Fixed
+- Fix build statics not handling folder properly
+
 ## [0.5.8] - 2018-05-24
 ### Fixed
 - Fix webpack config typo on devtool
