@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.8] - 2018-05-24
+### Fixed
+- Fix webpack config typo on devtool
+
 ## [0.5.7] - 2018-05-11
 ### Fixed
 - Temporary downgrade vue-loader to v14 (https://vue-loader.vuejs.org/migrating.html)
