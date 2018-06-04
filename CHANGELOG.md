@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.10] - 2018-06-04
+### Fixed
+- Fix static builder stops building process when there is no static files
+
+### Updated
+- Update all dependencies version
+
+### Removed
+- Remove Bootstrap package
+
 ## [0.5.9] - 2018-05-24
 ### Fixed
 - Fix build statics not handling folder properly
