@@ -1,5 +1,5 @@
 const base = process.cwd()
-const {join, resolve, basename, relative} = require('path')
+const {join, resolve, relative} = require('path')
 const {promisify} = require('util')
 const fs = require('fs')
 const glob = promisify(require('glob'))
