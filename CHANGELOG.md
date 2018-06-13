@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.11] - 2018-06-13
+### Added
+- Add 2 new env vars for JS build: VERSION and BUILD_HASH
+
 ## [0.5.10] - 2018-06-04
 ### Fixed
 - Fix static builder stops building process when there is no static files

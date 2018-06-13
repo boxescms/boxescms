@@ -62,3 +62,16 @@ Contents should be ignored. Storage folder for various runtime data usage.
 ### /conf/
 
 External configuration files.
+
+## Builders
+
+### JS
+
+There is 2 special env var that you can use in your JS files:
+
+- process.env.VERSION
+- process.env.BUILD_HASH
+
+`process.env.VERSION` is taken from your project's `package.json`.version.
+
+`process.env.BUILD_HASH` is a randomly generated per build 64 length hex char.

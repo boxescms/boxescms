@@ -5,6 +5,17 @@ const autoprefixer = require('autoprefixer')
 const {browserslist} = require('./package.json')
 const Dotenv = require('dotenv-webpack')
 const base = process.cwd()
+const webpack = require('webpack')
+const crypto = require('crypto')
+const fs = require('fs')
+
+const userPackageFilePath = path.join(base, 'package.json')
+const hasUserPackageFile = fs.existsSync(userPackageFilePath)
+const userPackageData = hasUserPackageFile ? require(userPackageFilePath) : {}
+
+const BUILDHASH = crypto.createHash('sha256')
+  .update(Date.now().toString() + Math.random().toString())
+  .digest('hex')
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
@@ -63,6 +74,10 @@ module.exports = {
   plugins: [
     new Dotenv({
       path: path.join(base, '.env')
+    }),
+    new webpack.EnvironmentPlugin({
+      VERSION: process.env.VERSION || userPackageData.version,
+      BUILD_HASH: process.env.BUILD_HASH || BUILDHASH
     })
   ],
   resolve: {
