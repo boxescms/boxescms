@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0] - 2018-06-20
+### Updated
+- Update all dependencies version
+
+### Removed
+- Removed imagemin and image compression build
+
 ## [0.5.11] - 2018-06-13
 ### Added
 - Add 2 new env vars for JS build: VERSION and BUILD_HASH
