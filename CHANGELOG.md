@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.2] - 2018-06-26
+### Added
+- Babel stage 2 preset in Webpack config
+
 ## [0.6.1] - 2018-06-26
 ### Added
 - App preinit and postinit support
