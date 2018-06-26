@@ -9,7 +9,7 @@ const {log} = console
 const getPort = require('get-port')
 
 const app = require('./entities/app')
-const userApp = join(base, 'app.js')
+const userAppFile = join(base, 'app.js')
 const {name, version} = require(join(base, 'package.json'))
 
 log()
@@ -18,8 +18,16 @@ log(chalk.blue(new Array(name.length + version.toString().length + 4).fill('-').
 log()
 
 module.exports = (async () => {
-  if (fs.existsSync(userApp)) {
-    await Promise.resolve(require(userApp)(app))
+  if (fs.existsSync(userAppFile)) {
+    const userApp = require(userAppFile)
+
+    if (typeof userApp === 'function') {
+      await Promise.resolve(userApp(app))
+    }
+
+    if (typeof userApp.postinit === 'function') {
+      await Promise.resolve(userApp.postinit(app))
+    }
   }
 
   if (!process.env.APP_PORT) {

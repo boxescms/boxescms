@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.1] - 2018-06-26
+### Added
+- App preinit and postinit support
+
 ## [0.6.0] - 2018-06-20
 ### Updated
 - Update all dependencies version
