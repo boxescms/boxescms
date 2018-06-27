@@ -90,6 +90,10 @@ packageData.scripts = Object.assign({}, {
   watch: 'boxes watch'
 }, packageData.scripts)
 
+packageData.standard = {
+  parser: 'babel-eslint'
+}
+
 fs.writeFileSync(packageFile, JSON.stringify(packageData, null, 2))
 
 console.log()
