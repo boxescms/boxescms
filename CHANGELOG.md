@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.3] - 2018-06-27
+### Added
+- babel-eslint parser to support dynamic import syntax
+
+### Fixed
+- Babel stage-2 preset not enabled on js files
+
 ## [0.6.2] - 2018-06-26
 ### Added
 - Babel stage 2 preset in Webpack config
