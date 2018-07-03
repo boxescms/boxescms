@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.4] - 2018-07-03
+### Fixed
+- Update Webpack JSONP function parameter to prevent multiple runtime collision
+
 ## [0.6.3] - 2018-06-27
 ### Added
 - babel-eslint parser to support dynamic import syntax

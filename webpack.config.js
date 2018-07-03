@@ -22,7 +22,8 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(base, 'public/js'),
-    publicPath: process.env.WEB_BASE + '/js/'
+    publicPath: process.env.WEB_BASE + '/js/',
+    jsonpFunction: 'webpack' + Date.now().toString()
   },
   module: {
     rules: [
