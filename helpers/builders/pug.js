@@ -45,7 +45,8 @@ const getData = async namespace => {
 
   if (fs.existsSync(globalfileJS)) {
     delete require.cache[globalfileJS]
-    mergeWith(data, require(globalfileJS), (obj, src) => src)
+
+    mergeWith(data, await Promise.resolve(require(globalfileJS)), (obj, src) => src)
   }
 
   if (fs.existsSync(globalfileJSON)) {
@@ -60,7 +61,7 @@ const getData = async namespace => {
 
   if (fs.existsSync(datafileJS)) {
     delete require.cache[datafileJS]
-    mergeWith(data, require(datafileJS), (obj, src) => src)
+    mergeWith(data, await Promise.resolve(require(datafileJS)), (obj, src) => src)
   }
 
   if (fs.existsSync(datafileJSON)) {

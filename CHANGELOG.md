@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.5] - 2018-07-12
+### Added
+- Added Promise support to data layer for pug compilation
+
 ## [0.6.4] - 2018-07-03
 ### Fixed
 - Update Webpack JSONP function parameter to prevent multiple runtime collision
