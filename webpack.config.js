@@ -63,9 +63,9 @@ module.exports = {
                     }
                   }],
                   'stage-2'
-                ]
-              },
-              plugins: ['lodash']
+                ],
+                plugins: ['lodash']
+              }
             },
             sass: {
               loader: 'style-loader!css-loader?url=false!sass-loader?indentedSyntax=true'

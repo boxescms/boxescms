@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.7] - 2018-07-19
+### Fixed
+- Fixed regression on wrong Webpack configuration plugin declaration
+
 ## [0.6.6] - 2018-07-19
 ### Fixed
 - Update Webpack with moment and lodash performance upgrade
