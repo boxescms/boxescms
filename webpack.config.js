@@ -41,7 +41,8 @@ module.exports = {
               }
             }],
             'stage-2'
-          ]
+          ],
+          plugins: ['lodash']
         }
       },
       {
@@ -63,7 +64,8 @@ module.exports = {
                   }],
                   'stage-2'
                 ]
-              }
+              },
+              plugins: ['lodash']
             },
             sass: {
               loader: 'style-loader!css-loader?url=false!sass-loader?indentedSyntax=true'
@@ -81,7 +83,8 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       VERSION: process.env.VERSION || userPackageData.version,
       BUILD_HASH: process.env.BUILD_HASH || BUILDHASH
-    })
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   resolve: {
     alias: {

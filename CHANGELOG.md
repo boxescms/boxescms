@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.6] - 2018-07-19
+### Fixed
+- Update Webpack with moment and lodash performance upgrade
+
 ## [0.6.5] - 2018-07-12
 ### Added
 - Added Promise support to data layer for pug compilation
