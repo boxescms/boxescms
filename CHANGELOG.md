@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.8] - 2018-07-20
+### Fixed
+- Update Webpack to generate chunk with querystring
+
 ## [0.6.7] - 2018-07-19
 ### Fixed
 - Fixed regression on wrong Webpack configuration plugin declaration

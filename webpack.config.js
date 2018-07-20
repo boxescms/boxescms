@@ -21,6 +21,7 @@ module.exports = {
   mode: process.env.NODE_ENV || 'development',
   output: {
     filename: '[name].js',
+    chunkFilename: '[name].js?[hash]',
     path: path.resolve(base, 'public/js'),
     publicPath: process.env.WEB_BASE + '/js/',
     jsonpFunction: 'webpack' + Date.now().toString()
