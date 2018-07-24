@@ -8,16 +8,20 @@ const base = process.cwd()
 const webpack = require('webpack')
 const crypto = require('crypto')
 const fs = require('fs')
+const webpackMerge = require('webpack-merge')
 
 const userPackageFilePath = path.join(base, 'package.json')
 const hasUserPackageFile = fs.existsSync(userPackageFilePath)
 const userPackageData = hasUserPackageFile ? require(userPackageFilePath) : {}
 
+const userWebpackMergeFilePath = path.join(base, 'webpack.merge.js')
+const hasUserWebpackMergeFilePath = fs.existsSync(userWebpackMergeFilePath)
+
 const BUILDHASH = crypto.createHash('sha256')
   .update(Date.now().toString() + Math.random().toString())
   .digest('hex')
 
-module.exports = {
+const coreWebpackConfig = {
   mode: process.env.NODE_ENV || 'development',
   output: {
     filename: '[name].js',
@@ -101,3 +105,5 @@ module.exports = {
   },
   devtool: process.env.NODE_ENV === 'production' ? false : 'cheap-eval-source-map'
 }
+
+module.exports = hasUserWebpackMergeFilePath ? webpackMerge.smart(coreWebpackConfig, require(userWebpackMergeFilePath)) : coreWebpackConfig

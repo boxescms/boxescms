@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.7.0] - 2018-07-24
+### Added
+- Added Webpack Merge to utilise app `webpack.merge.js` file
+
 ## [0.6.8] - 2018-07-20
 ### Fixed
 - Update Webpack to generate chunk with querystring
