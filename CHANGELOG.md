@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.1] - 2018-07-25
+### Added
+- Mustache render on SASS/SCSS compiler to support ENV
+
+### Fixed
+- Shift dotenv requirement to parent builder
+- Avoid using reserved name for static
+
 ## [0.7.0] - 2018-07-24
 ### Added
 - Added Webpack Merge to utilise app `webpack.merge.js` file
