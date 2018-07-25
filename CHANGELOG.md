@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.7.2] - 2018-07-25
+### Fixed
+- Prerender Mustache before SASS/SCSS build
+
 ## [0.7.1] - 2018-07-25
 ### Added
 - Mustache render on SASS/SCSS compiler to support ENV

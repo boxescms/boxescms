@@ -4,7 +4,9 @@ const {browserslist} = require(resolve(__dirname, '../../package.json'))
 const {promisify} = require('util')
 const glob = promisify(require('glob'))
 const sass = promisify(require('node-sass').render)
-const writeFile = promisify(require('fs').writeFile)
+const fs = require('fs')
+const writeFile = promisify(fs.writeFile)
+const readFile = promisify(fs.readFile)
 const autoprefixer = require('autoprefixer')
 const postcss = require('postcss')
 const mkdirp = promisify(require('mkdirp'))
@@ -31,16 +33,16 @@ const builder = async file => {
   const filename = basename(relativepath, '.scss')
   const target = join(base, 'public', 'css', dir, `${filename}.css`)
 
+  const sassString = await readFile(fullpath, 'utf8')
+
   const sassResult = await sass({
-    file: fullpath,
+    data: mustache.render(sassString, process.env),
     outputStyle: 'compressed'
   })
 
-  const cssString = mustache.render(sassResult.css.toString(), process.env)
-
   const autoprefixResult = await postcss([autoprefixer({
     browsers: browserslist
-  })]).process(cssString)
+  })]).process(sassResult.css.toString())
 
   await mkdirp(dirname(target))
 
