@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const base = process.cwd()
 const {promisify} = require('util')
 const {join, resolve, relative, dirname, basename, extname} = require('path')
