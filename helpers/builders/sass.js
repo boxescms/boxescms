@@ -9,6 +9,7 @@ const autoprefixer = require('autoprefixer')
 const postcss = require('postcss')
 const mkdirp = promisify(require('mkdirp'))
 const chalk = require('chalk')
+const mustache = require('mustache')
 
 const builder = async file => {
   const time = Date.now()
@@ -35,9 +36,11 @@ const builder = async file => {
     outputStyle: 'compressed'
   })
 
+  const cssString = mustache.render(sassResult.css.toString(), process.env)
+
   const autoprefixResult = await postcss([autoprefixer({
     browsers: browserslist
-  })]).process(sassResult.css.toString())
+  })]).process(cssString)
 
   await mkdirp(dirname(target))
 
