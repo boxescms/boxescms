@@ -84,6 +84,7 @@ const packageData = require(packageFile)
 
 packageData.scripts = Object.assign({}, {
   start: 'boxes start',
+  dev: 'boxes build && boxes start dev',
   'server:start': 'boxes start',
   'server:dev': 'boxes start dev',
   build: 'boxes build',
