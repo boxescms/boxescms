@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.3] - 2018-07-26
+### Added
+- `npm run dev` script for dev start up
+
+### Fixed
+- Reverted 0.7.2 for prerendering Mustacha on SASS/SCSS compiler
+
 ## [0.7.1] - 2018-07-25
 ### Added
 - Mustache render on SASS/SCSS compiler to support ENV
