@@ -9,6 +9,7 @@ const webpack = require('webpack')
 const crypto = require('crypto')
 const fs = require('fs')
 const webpackMerge = require('webpack-merge')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const userPackageFilePath = path.join(base, 'package.json')
 const hasUserPackageFile = fs.existsSync(userPackageFilePath)
@@ -51,33 +52,45 @@ const coreWebpackConfig = {
         }
       },
       {
+        test: /\.pug$/,
+        oneOf: [
+          {
+            resourceQuery: /^\?vue/,
+            use: ['pug-plain-loader']
+          },
+          {
+            use: ['raw-loader', 'pug-plain-loader']
+          }
+        ]
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          'vue-style-loader',
+          'css-loader?url=false',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins () {
+                autoprefixer()
+              }
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              identedSyntax: true
+            }
+          }
+        ]
+      },
+      {
         test: /\.vue?$/,
         include: [
           path.resolve(base, 'web')
         ],
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            js: {
-              loader: 'babel-loader',
-              options: {
-                presets: [
-                  ['env', {
-                    targets: {
-                      browsers: browserslist
-                    }
-                  }],
-                  'stage-2'
-                ],
-                plugins: ['lodash']
-              }
-            },
-            sass: {
-              loader: 'style-loader!css-loader?url=false!sass-loader?indentedSyntax=true'
-            }
-          },
-          postcss: [autoprefixer()]
-        }
+        loader: 'vue-loader'
       }
     ]
   },
@@ -89,6 +102,7 @@ const coreWebpackConfig = {
       VERSION: process.env.VERSION || userPackageData.version,
       BUILD_HASH: process.env.BUILD_HASH || BUILDHASH
     }),
+    new VueLoaderPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   resolve: {
