@@ -86,6 +86,23 @@ const coreWebpackConfig = {
         ]
       },
       {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader?url=false',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins () {
+                autoprefixer()
+              }
+            }
+          },
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.vue?$/,
         include: [
           path.resolve(base, 'web')
