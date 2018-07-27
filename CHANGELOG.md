@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.0] - 2018-07-27
+### Updated
+- Update vue-loader to v15
+- Update boxes init to include browserlist
+- Update all package version
+
 ## [0.7.3] - 2018-07-26
 ### Added
 - `npm run dev` script for dev start up
