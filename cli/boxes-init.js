@@ -6,6 +6,7 @@ const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
 const base = process.cwd()
+const {browserslist} = require('../package.json')
 
 console.log()
 console.log(chalk.yellow('Creating folders...'))
@@ -90,6 +91,10 @@ packageData.scripts = Object.assign({}, {
   build: 'boxes build',
   watch: 'boxes watch'
 }, packageData.scripts)
+
+if (!packageData.browserslist) {
+  packageData.browserslist = browserslist
+}
 
 packageData.standard = {
   parser: 'babel-eslint'
