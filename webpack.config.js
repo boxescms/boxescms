@@ -80,7 +80,7 @@ const coreWebpackConfig = {
           {
             loader: 'sass-loader',
             options: {
-              identedSyntax: true
+              indentedSyntax: true
             }
           }
         ]

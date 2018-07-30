@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.1] - 2018-07-30
+### Fixed
+- Regression on 0.8.0 with typo for indentedSyntax on Webpack config
+
 ## [0.8.0] - 2018-07-27
 ### Updated
 - Update vue-loader to v15
