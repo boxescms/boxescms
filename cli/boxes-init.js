@@ -7,6 +7,7 @@ const fs = require('fs')
 const path = require('path')
 const base = process.cwd()
 const {browserslist} = require('../package.json')
+const crypto = require('crypto')
 
 console.log()
 console.log(chalk.yellow('Creating folders...'))
@@ -41,7 +42,7 @@ console.log('------------------------')
 ;[
   {
     src: 'env.example',
-    dest: ['.env.example']
+    dest: ['.env.example', '.env']
   },
   {
     src: 'editorconfig',
@@ -102,6 +103,27 @@ packageData.standard = {
 
 fs.writeFileSync(packageFile, JSON.stringify(packageData, null, 2))
 
+const envfile = path.join(base, '.env')
+let envcontent = fs.readFileSync(envfile, 'utf8')
+
+let appkey
+
+const searchAPPKEY = (/APP_KEY=(.*)\n/gm).exec(envcontent)
+
+if (searchAPPKEY === null || searchAPPKEY[1] === '') {
+  appkey = crypto.randomBytes(32).toString('hex')
+
+  if (searchAPPKEY === null) {
+    envcontent = `APP_KEY=${appkey}\n` + envcontent
+  }
+
+  if (searchAPPKEY && searchAPPKEY[1] === '') {
+    envcontent = envcontent.replace(/APP_KEY=(.*)\n/gm, `APP_KEY=${appkey}\n`)
+  }
+
+  fs.writeFileSync(envfile, envcontent, 'utf8')
+}
+
 console.log()
 console.log(chalk.yellow('Updated package.json with default scripts'))
 
@@ -112,8 +134,18 @@ console.log(chalk.green('Success!'))
 console.log()
 console.log(chalk.green('Boxes CMS'))
 console.log('---------')
-console.log('1. Run `' + chalk.blue('boxes generateAppKey') + '` to get a randomised app key.')
-console.log('2. Update .env with APP_KEY and APP_PORT, and DB as well if required from .env.example.')
-console.log('3. Run `' + chalk.blue('npm start') + '` to start the server.')
+
+console.log(`** .env **`)
+if (appkey) {
+  console.log(`* APP_KEY has been initialised to: ${appkey}`)
+  console.log('* Run `' + chalk.blue('boxes generateAppKey') + '` to regenerate a randomised app key.')
+}
+
+console.log('* Update .env APP_PORT and DB_* if required.')
+
+console.log()
+console.log('** Start Server **')
+console.log('* Run `' + chalk.blue('npm start') + '` or `' + chalk.blue('yarn start') + '` to start the server.')
+console.log('* Run `' + chalk.blue('npm run dev') + '` or `' + chalk.blue('yarn dev') + '` to start the server in watch mode.')
 console.log('---------')
 console.log()
