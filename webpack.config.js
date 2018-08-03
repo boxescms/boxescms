@@ -134,7 +134,7 @@ const coreWebpackConfig = {
       name: 'vendor'
     }
   },
-  devtool: process.env.NODE_ENV === 'production' ? false : 'cheap-eval-source-map'
+  devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map'
 }
 
 module.exports = hasUserWebpackMergeFilePath ? webpackMerge.smart(coreWebpackConfig, require(userWebpackMergeFilePath)) : coreWebpackConfig
