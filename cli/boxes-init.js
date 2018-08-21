@@ -97,8 +97,22 @@ if (!packageData.browserslist) {
   packageData.browserslist = browserslist
 }
 
-packageData.standard = {
-  parser: 'babel-eslint'
+if (!packageData.standard) {
+  packageData.standard = {
+    parser: 'babel-eslint'
+  }
+}
+
+if (!packageData.eslintConfig) {
+  packageData.eslintConfig = {
+    extends: [
+      'plugin:vue/essential',
+      'standard'
+    ],
+    parserOptions: {
+      parser: 'babel-eslint'
+    }
+  }
 }
 
 fs.writeFileSync(packageFile, JSON.stringify(packageData, null, 2))
