@@ -1,0 +1,22 @@
+image: node:alpine-latest
+
+stages:
+  - test
+
+before_script:
+  - yarn install
+
+Lint JS:
+  stage: test
+  script:
+    - yarn lint:js
+
+Lint Vue:
+  stage: test
+  script:
+    - yarn lint:vue
+
+Lint Pug:
+  stage: test
+  script:
+    - yarn lint:pug

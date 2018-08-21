@@ -41,6 +41,10 @@ console.log('------------------------')
 
 ;[
   {
+    src: 'gitlab-ci.yml',
+    dest: ['.gitlab-ci.yml']
+  },
+  {
     src: 'env.example',
     dest: ['.env.example', '.env']
   },
@@ -92,6 +96,18 @@ packageData.scripts = Object.assign({}, {
   build: 'boxes build',
   watch: 'boxes watch'
 }, packageData.scripts)
+
+if (!packageData.scripts['lint:js']) {
+  packageData.scripts['lint:js'] = 'standard'
+}
+
+if (!packageData.scripts['lint:vue']) {
+  packageData.scripts['lint:vue'] = 'eslint --ext .vue web'
+}
+
+if (!packageData.scripts['lint:pug']) {
+  packageData.scripts['lint:pug'] = 'pug-lint web'
+}
 
 if (!packageData.browserslist) {
   packageData.browserslist = browserslist
