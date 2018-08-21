@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.9.0] - 2018-08-21
+### Updated
+- Webpack devtool to use `inline-cheap-source-map`
+- Vue linting with eslint-plugin-vue@next
+- New JsonStore interface
+- Admin API
+- Dependencies version
+
+## [0.8.3] - 2018-08-01
+### Updated
+- `boxes init` to set app key into .env by default
+
+## [0.8.2] - 2018-07-31
+### Added
+- Vue linting with eslint-plugin-html
+
 ## [0.8.1] - 2018-07-30
 ### Fixed
 - Regression on 0.8.0 with typo for indentedSyntax on Webpack config
