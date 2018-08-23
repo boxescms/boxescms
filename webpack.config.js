@@ -72,9 +72,9 @@ const coreWebpackConfig = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins () {
+              plugins: [
                 autoprefixer()
-              }
+              ]
             }
           },
           {
@@ -94,9 +94,9 @@ const coreWebpackConfig = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins () {
+              plugins: [
                 autoprefixer()
-              }
+              ]
             }
           },
           'sass-loader'

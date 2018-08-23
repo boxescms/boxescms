@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.1] - 2018-08-23
+### Fixed
+- Webpack config not loading PostCSS plugins properly
+
 ## [0.9.0] - 2018-08-21
 ### Updated
 - Webpack devtool to use `inline-cheap-source-map`
