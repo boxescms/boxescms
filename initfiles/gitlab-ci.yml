@@ -2,6 +2,7 @@ image: node:alpine-latest
 
 stages:
   - test
+  - deploy
 
 before_script:
   - yarn install
@@ -20,3 +21,23 @@ Lint Pug:
   stage: test
   script:
     - yarn lint:pug
+
+Deploy:
+  stage: deploy
+  only:
+    - /v\d+\.\d+\.\d+/
+  script:
+    - echo "Deploy"
+
+Bump Version Patch:
+  stage: deploy
+  only:
+    - deploy
+  script:
+    - apk add git
+    - git remote set-url origin $(perl -pe "s|.*(@.*?)/(.*)|git\1:\2|g" <<< $(git remote get-url --push origin))
+    - git reset --hard && git clean -fd
+    - git checkout master
+    - git pull
+    - npm version patch
+    - git push && git push --tags
