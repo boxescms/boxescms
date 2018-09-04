@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.2] - 2018-09-04
+### Updated
+- Major performance bump on Webpack watch
+
 ## [0.9.1] - 2018-08-23
 ### Fixed
 - Webpack config not loading PostCSS plugins properly

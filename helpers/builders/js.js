@@ -16,44 +16,77 @@ const webpackConfig = require(webpackFile)
 
 const basejspath = join(base, 'web/js')
 
-const builder = async () => {
+let webpackInstance
+
+const logStats = stats => {
+  const info = stats.toJson()
+
+  if (stats.hasErrors()) {
+    info.errors.map(err => console.error(err))
+  }
+
+  if (stats.hasWarnings()) {
+    info.warnings.map(err => console.warn(err))
+  }
+
+  console.log(stats.toString({
+    colors: true
+  }))
+}
+
+const builder = async (watch = false) => {
   const time = Date.now()
 
-  const files = await glob(join(basejspath, '**/*.js'))
+  if (!webpackInstance) {
+    const files = await glob(join(basejspath, '**/*.js'))
 
-  if (!files.length) {
-    console.log(chalk.grey('Skipping JS - No files to compile'))
+    if (!files.length) {
+      console.log(chalk.grey('Skipping JS - No files to compile'))
+      return
+    }
+
+    const entry = files.reduce((entries, file) => {
+      const filename = relative(basejspath, file).slice(0, -3)
+
+      entries[filename] = file
+
+      return entries
+    }, {})
+
+    webpackConfig.entry = entry
+
+    await mkdirp(join(base, 'public', 'js'))
+
+    webpackInstance = webpack(webpackConfig)
+  }
+
+  if (watch) {
+    webpackInstance.watch({
+      ignored: ['node_modules', 'api/**', 'storage/**', 'public/**', 'server/**']
+    }, (err, stats) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+
+      console.log(`${chalk.yellow('JS')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
+    })
+
     return
   }
 
-  const entry = files.reduce((entries, file) => {
-    const filename = relative(basejspath, file).slice(0, -3)
-
-    entries[filename] = file
-
-    return entries
-  }, {})
-
-  webpackConfig.entry = entry
-
-  await mkdirp(join(base, 'public', 'js'))
-
   try {
-    const stats = await promisify(webpack)(webpackConfig)
+    const stats = await new Promise((resolve, reject) => {
+      webpackInstance.run((err, res) => {
+        if (err) {
+          return reject(err)
+        }
 
-    const info = stats.toJson()
+        resolve(res)
+      })
+    })
 
-    if (stats.hasErrors()) {
-      info.errors.map(err => console.error(err))
-    }
-
-    if (stats.hasWarnings()) {
-      info.warnings.map(err => console.warn(err))
-    }
-
-    console.log(stats.toString({
-      colors: true
-    }))
+    logStats(stats)
   } catch (err) {
     console.error(err)
   }
