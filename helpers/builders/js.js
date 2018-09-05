@@ -69,6 +69,24 @@ const builder = async (watch = false) => {
         return
       }
 
+      const info = stats.toJson()
+
+      let hasErrors = false
+
+      if (stats.hasErrors()) {
+        info.errors.map(err => console.error(err))
+        hasErrors = true
+      }
+
+      if (stats.hasWarnings()) {
+        info.warnings.map(err => console.warn(err))
+        hasErrors = true
+      }
+
+      if (hasErrors) {
+        return
+      }
+
       console.log(`${chalk.yellow('JS')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
     })
 

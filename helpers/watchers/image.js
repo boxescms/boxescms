@@ -3,8 +3,10 @@ const chokidar = require('chokidar')
 const builder = require('../builders/image')
 const chalk = require('chalk')
 
-module.exports = () => {
+module.exports = async () => {
   console.log(chalk.blue('Watching Images ') + chalk.yellow('[web/**/*.{png,jpg,svg,gif,mp4}]'))
+
+  await builder()
 
   const watcher = chokidar.watch([
     'web/**/*.{png,jpg,svg,gif,mp4}'

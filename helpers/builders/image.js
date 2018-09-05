@@ -58,8 +58,6 @@ const buildUncompressedImages = async () => {
 }
 
 module.exports = async () => {
-  const time = Date.now()
-
   const files = await glob(join(base, 'web/**/*.{svg,gif,mp4,jpg,png}'))
 
   if (!files.length) {
@@ -71,5 +69,5 @@ module.exports = async () => {
 
   await buildUncompressedImages()
 
-  console.log(`Compiled ${chalk.yellow('Images')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
+  console.log(`${chalk.yellow('Images')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
 }

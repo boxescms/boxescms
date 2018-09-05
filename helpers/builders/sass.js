@@ -12,8 +12,6 @@ const chalk = require('chalk')
 const mustache = require('mustache')
 
 const builder = async file => {
-  const time = Date.now()
-
   if (!file) {
     const files = await glob(join(base, 'web/sass/**/*.sass'))
 
@@ -22,7 +20,11 @@ const builder = async file => {
       return
     }
 
-    return Promise.all(files.map(builder))
+    await Promise.all(files.map(builder))
+
+    console.log(`${chalk.yellow('SASS')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
+
+    return
   }
 
   const fullpath = resolve(base, file)
@@ -45,8 +47,6 @@ const builder = async file => {
   await mkdirp(dirname(target))
 
   await writeFile(target, autoprefixResult.css)
-
-  console.log(`Compiled ${chalk.yellow('SASS')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
 }
 
 module.exports = builder

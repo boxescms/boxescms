@@ -126,8 +126,6 @@ const buildFromData = async (relativepath, sums) => {
 }
 
 const builder = async file => {
-  const time = Date.now()
-
   const sums = await buildHashsum()
 
   if (!file) {
@@ -153,14 +151,14 @@ const builder = async file => {
 
     await Promise.all(relativedatafiles.map(file => buildFromData(file, sums)))
 
-    console.log(`Compiled ${chalk.yellow('PUG')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
+    console.log(`${chalk.yellow('PUG')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
 
     return
   }
 
   await buildPug(file, sums)
 
-  console.log(`Compiled ${chalk.yellow('PUG')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
+  console.log(`${chalk.yellow('PUG')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
 }
 
 module.exports = builder

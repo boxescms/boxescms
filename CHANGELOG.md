@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.3] - 2018-09-05
+### Updated
+- Builders to log consistent output
+
 ## [0.9.2] - 2018-09-04
 ### Updated
 - Major performance bump on Webpack watch
