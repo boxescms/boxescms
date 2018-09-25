@@ -30,6 +30,11 @@ module.exports = (async () => {
     }
   }
 
+  // To deprecate APP_PORT, and favor PORT instead
+  if (process.env.PORT) {
+    process.env.APP_PORT = process.env.PORT
+  }
+
   if (!process.env.APP_PORT) {
     process.env.APP_PORT = await getPort()
     log(chalk.red(`APP_PORT not defined. Using port ${process.env.APP_PORT}.`))
