@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0] - 2018-09-25
+### Added
+- PORT env support
+
+### Updated
+- Babel updated to v7
+
 ## [0.9.3] - 2018-09-05
 ### Updated
 - Builders to log consistent output
