@@ -155,4 +155,4 @@ The data files in `/data/**/*.{js,json,yml}` is used in 2 ways:
 
 ## Server Debug Mode
 
-In dev/watch mode, the node inspector is enabled by default on port 9229. You can either use `chrome://inspect` on Chrome browser to use the default `.vscode/launch.json` from init to attach debugger.
+The node inspector can be enabled by passing `--inspect [port=9229]` to `boxes start` command. You can either use `chrome://inspect` on Chrome browser to use the default `.vscode/launch.json` from init to attach debugger.

@@ -13,7 +13,13 @@ const devServer = () => {
 
   const indexfile = existsSync('node_modules/boxescms/index.js') ? 'node_modules/boxescms/index.js' : 'index.js'
 
-  server = spawn('node', ['--inspect', indexfile], {
+  const args = [indexfile]
+
+  if (process.env.BOXES_INSPECTPORT) {
+    args.unshift(`--inspect=${process.env.BOXES_INSPECTPORT}`)
+  }
+
+  server = spawn('node', args, {
     stdio: 'inherit'
   })
 }
