@@ -152,3 +152,7 @@ The data files in `/data/**/*.{js,json,yml}` is used in 2 ways:
   ```
   <head><title>Hello World</title></head>
   ```
+
+## Server Debug Mode
+
+In dev/watch mode, the node inspector is enabled by default on port 9229. You can either use `chrome://inspect` on Chrome browser to use the default `.vscode/launch.json` from init to attach debugger.
