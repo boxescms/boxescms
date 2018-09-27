@@ -49,9 +49,13 @@ const coreWebpackConfig = {
           ],
           plugins: [
             'lodash',
-            '@babel/plugin-proposal-decorators',
+            ['@babel/plugin-proposal-decorators', {
+              legacy: false
+            }],
             '@babel/plugin-syntax-dynamic-import',
-            '@babel/plugin-proposal-class-properties'
+            ['@babel/plugin-proposal-class-properties', {
+              loose: false
+            }]
           ]
         }
       },
