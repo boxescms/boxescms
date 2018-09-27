@@ -13,7 +13,7 @@ const devServer = () => {
 
   const indexfile = existsSync('node_modules/boxescms/index.js') ? 'node_modules/boxescms/index.js' : 'index.js'
 
-  server = spawn('node', [indexfile], {
+  server = spawn('node', ['--inspect', indexfile], {
     stdio: 'inherit'
   })
 }
