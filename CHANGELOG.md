@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.10.4] - 2018-09-27
+### Fixed
+- Inspect mode on `--inspect` option
+- Babel 7 upgrade issues on webpack build
+
 ## [0.10.1] - 2018-09-27
 ### Added
 - Inspect mode on server watch
