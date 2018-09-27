@@ -7,7 +7,6 @@ router.get('/:file',
   getAdmin,
   authorizeAdmin,
   (req, res) => {
-
     return res.end()
   })
 

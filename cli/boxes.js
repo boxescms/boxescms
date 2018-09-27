@@ -3,7 +3,7 @@
 const appPackage = require('../helpers/checkIsProjectFolder')
 const appversion = appPackage.version
 const program = require('commander')
-const {version} = require('../package.json')
+const { version } = require('../package.json')
 
 program
   .version(`APP: ${appversion}, CMS: ${version}`)

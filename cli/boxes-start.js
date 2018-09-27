@@ -3,7 +3,7 @@
 require('dotenv').config()
 const program = require('commander')
 const chalk = require('chalk')
-const {log} = console
+const { log } = console
 
 let env = process.env.NODE_ENV
 

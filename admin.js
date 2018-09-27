@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const chalk = require('chalk')
 const http = require('http')
-const {log} = console
+const { log } = console
 const getPort = require('get-port')
 
 const app = require('./entities/admin')

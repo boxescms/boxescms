@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const {join} = require('path')
+const { join } = require('path')
 const fs = require('fs')
 const base = process.cwd()
 const userAppFile = join(base, 'app.js')

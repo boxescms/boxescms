@@ -1,5 +1,5 @@
 const glob = require('glob')
-const {join, basename} = require('path')
+const { join, basename } = require('path')
 
 const watchers = glob.sync(join(__dirname, 'watchers/*.js')).reduce((items, file) => {
   items[basename(file, '.js')] = require(file)

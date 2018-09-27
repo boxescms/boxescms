@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
 const base = process.cwd()
-const {browserslist} = require('../package.json')
+const { browserslist } = require('../package.json')
 const crypto = require('crypto')
 
 console.log()

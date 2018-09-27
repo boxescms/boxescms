@@ -1,5 +1,5 @@
 const glob = require('glob')
-const {resolve, relative, join, dirname, basename} = require('path')
+const { resolve, relative, join, dirname, basename } = require('path')
 const express = require('express')
 const router = express.Router()
 

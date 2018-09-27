@@ -1,6 +1,6 @@
 const base = process.cwd()
-const {promisify} = require('util')
-const {join, resolve, relative, dirname, basename, extname} = require('path')
+const { promisify } = require('util')
+const { join, resolve, relative, dirname, basename, extname } = require('path')
 const fs = require('fs')
 const pug = require('pug')
 const glob = promisify(require('glob'))

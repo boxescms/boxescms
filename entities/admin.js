@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const {resolve} = require('path')
+const { resolve } = require('path')
 
 app.use(require('compression')())
 

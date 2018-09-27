@@ -1,6 +1,6 @@
 const base = process.cwd()
-const {join, relative, dirname} = require('path')
-const {promisify} = require('util')
+const { join, relative, dirname } = require('path')
+const { promisify } = require('util')
 const glob = promisify(require('glob'))
 const fs = require('fs')
 const copyFile = promisify(fs.copyFile)

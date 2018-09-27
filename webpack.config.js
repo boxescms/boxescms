@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const path = require('path')
 const autoprefixer = require('autoprefixer')
-const {browserslist} = require('./package.json')
+const { browserslist } = require('./package.json')
 const Dotenv = require('dotenv-webpack')
 const base = process.cwd()
 const webpack = require('webpack')

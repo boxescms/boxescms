@@ -3,14 +3,14 @@ require('dotenv').config()
 const base = process.cwd()
 const chalk = require('chalk')
 const fs = require('fs')
-const {join} = require('path')
+const { join } = require('path')
 const http = require('http')
-const {log} = console
+const { log } = console
 const getPort = require('get-port')
 
 const app = require('./entities/app')
 const userAppFile = join(base, 'app.js')
-const {name, version} = require(join(base, 'package.json'))
+const { name, version } = require(join(base, 'package.json'))
 
 log()
 log(chalk.blue(name) + ' ' + chalk.yellow(`[v${version}]`))

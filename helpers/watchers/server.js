@@ -1,8 +1,8 @@
 const base = process.cwd()
 const chokidar = require('chokidar')
 const chalk = require('chalk')
-const {spawn} = require('child_process')
-const {existsSync} = require('fs')
+const { spawn } = require('child_process')
+const { existsSync } = require('fs')
 
 let server
 

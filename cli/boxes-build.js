@@ -5,7 +5,7 @@ require('dotenv').config()
 const program = require('commander')
 const glob = require('glob')
 const chalk = require('chalk')
-const {basename, resolve} = require('path')
+const { basename, resolve } = require('path')
 const allowedTypes = glob.sync(resolve(__dirname, '../helpers/builders/*.js')).map(item => basename(item, '.js'))
 
 let inputtypes

@@ -1,6 +1,6 @@
 const base = process.cwd()
-const {promisify} = require('util')
-const {join} = require('path')
+const { promisify } = require('util')
+const { join } = require('path')
 const chalk = require('chalk')
 const ncp = promisify(require('ncp').ncp)
 

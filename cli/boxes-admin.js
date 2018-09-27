@@ -3,9 +3,9 @@
 require('dotenv').config()
 
 const program = require('commander')
-const {blue, yellow, red} = require('chalk')
+const { blue, yellow, red } = require('chalk')
 const Admin = require('../stores/admin')
-const {log} = console
+const { log } = console
 
 const input = {
   username: '',
