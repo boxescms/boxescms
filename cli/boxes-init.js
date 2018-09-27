@@ -22,7 +22,8 @@ console.log('-------------------')
   'storage/logs',
   'storage/tmp',
   'conf',
-  'conf/nginx'
+  'conf/nginx',
+  '.vscode'
 ]
   .map(item => {
     const folder = path.join(base, item)
@@ -67,6 +68,10 @@ console.log('------------------------')
   {
     src: 'nginx.conf',
     dest: ['conf/nginx/app.conf']
+  },
+  {
+    src: 'vscodelaunch.json',
+    dest: ['.vscode/launch.json']
   }
 ]
   .map(item => {
