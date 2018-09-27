@@ -41,14 +41,18 @@ const coreWebpackConfig = {
         loader: 'babel-loader',
         options: {
           presets: [
-            ['env', {
+            ['@babel/preset-env', {
               targets: {
                 browsers: browserslist
               }
-            }],
-            'stage-2'
+            }]
           ],
-          plugins: ['lodash']
+          plugins: [
+            'lodash',
+            '@babel/plugin-proposal-decorators',
+            '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-proposal-class-properties'
+          ]
         }
       },
       {
