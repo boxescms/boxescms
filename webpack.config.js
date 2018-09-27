@@ -50,6 +50,7 @@ const coreWebpackConfig = {
           plugins: [
             'lodash',
             ['@babel/plugin-proposal-decorators', {
+              decoratorsBeforeExport: false,
               legacy: false
             }],
             '@babel/plugin-syntax-dynamic-import',
