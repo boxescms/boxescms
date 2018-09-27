@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.10.1] - 2018-09-27
+### Added
+- Inspect mode on server watch
+
 ## [0.10.0] - 2018-09-25
 ### Added
 - PORT env support
