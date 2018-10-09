@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.11.0] - 2018-10-09
+### Added
+- dbpool entity @ boxescms/entities/dbpool for isolated db pool connection
+- Dotfiles data (JS) support for PUG build
+
 ## [0.10.4] - 2018-09-27
 ### Fixed
 - Inspect mode on `--inspect` option

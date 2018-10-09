@@ -153,6 +153,37 @@ The data files in `/data/**/*.{js,json,yml}` is used in 2 ways:
   <head><title>Hello World</title></head>
   ```
 
+## Dotfiles Template Data (JS)
+
+Apart from a general template data, you can create dotfiles to create multiple pages under a single template. Currently only supports `.js` file, in `/data/**/.*.js`
+
+The data file must contain `.template` key to define what template to use. Subsequent keys will be the page to create, and the value is an object of the locals to use for that page.
+
+The file should export a Promise instance, in which allows you to perform async operations to populate the final object to resolve.
+
+  - /data/.pages.js
+
+  ```
+  const data = {
+    '.template': 'index.pug',
+    '/dashboard': {
+      title: 'Dashboard'
+    }
+  }
+
+  module.exports = new Promise((resolve, reject) => {
+    // async operations if needed
+
+    resolve(data)
+  })
+  ```
+
+  - /public/dashboard.html
+
+  ```
+  <head><title>Dashboard</title></head>
+  ```
+
 ## Server Debug Mode
 
 The node inspector can be enabled by passing `--inspect [port=9229]` to `boxes start` command. You can either use `chrome://inspect` on Chrome browser to use the default `.vscode/launch.json` from init to attach debugger.
