@@ -125,6 +125,29 @@ const buildFromData = async (relativepath, sums) => {
   return generateHTML(templateFile, join(base, 'public', relativepath + '.html'), data, sums)
 }
 
+const buildFromDotData = async (file, sums) => {
+  if (sums === undefined) {
+    sums = await buildHashsum()
+  }
+
+  // Support JS only for now
+  const data = await require(file)
+
+  const templateFile = join(base, 'web/template', data['.template'])
+
+  delete data['.template']
+
+  const pages = Object.keys(data)
+
+  if (!fs.existsSync(templateFile)) {
+    return
+  }
+
+  return Promise.all(pages.map(page => {
+    return generateHTML(templateFile, join(base, 'public', page + '.html'), data[page], sums)
+  }))
+}
+
 const builder = async file => {
   const sums = await buildHashsum()
 
@@ -132,6 +155,8 @@ const builder = async file => {
     const files = await glob(join(base, 'web/pug/**/*.pug'))
 
     const datafiles = await glob(join(base, 'data/**/*.{js,json,yml}'))
+
+    const dotfiles = await glob(join(base, 'data/**/.*.js'))
 
     if (!files.length && !datafiles.length) {
       console.log(chalk.grey('Skipping PUG - No files to compile'))
@@ -150,6 +175,8 @@ const builder = async file => {
       .filter(file => !relativefiles.includes(file)))]
 
     await Promise.all(relativedatafiles.map(file => buildFromData(file, sums)))
+
+    await Promise.all(dotfiles.map(file => buildFromDotData(file, sums)))
 
     console.log(`${chalk.yellow('PUG')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
 
