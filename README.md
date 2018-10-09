@@ -108,7 +108,7 @@ There is 2 special env var that you can use in your JS files:
 
 The data files in `/data/**/*.{js,json,yml}` is used in 2 ways:
 
-1. When compiling `/web/pug/[**/*].pug` file, if there is a matching `/web/data/[**/*].{js,json,yml}` file, it will use the data file as the locals for Pug compilation. The pug files will be compiled to `/public/[**/*].html`.
+1. When compiling `/web/pug/[**/*].pug` file, if there is a matching `/data/[**/*].{js,json,yml}` file, it will use the data file as the locals for Pug compilation. The pug files will be compiled to `/public/[**/*].html`.
 
   - /web/pug/page.pug
 
