@@ -135,9 +135,9 @@ const buildFromDotData = async (file, sums) => {
 
   const templateFile = join(base, 'web/template', data['.template'])
 
-  delete data['.template']
-
   const pages = Object.keys(data)
+
+  pages.splice(pages.indexOf('.template'), 1)
 
   if (!fs.existsSync(templateFile)) {
     return

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.1] - 2018-10-31
+### Fixed
+- Fix building pug for dotfiles throws error
+
 ## [0.11.0] - 2018-10-09
 ### Added
 - dbpool entity @ boxescms/entities/dbpool for isolated db pool connection
