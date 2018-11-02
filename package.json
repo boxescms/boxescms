@@ -67,6 +67,7 @@
     "pug-lint": "^2.5.0",
     "pug-plain-loader": "^1.0.0",
     "qs": "^6.5.2",
+    "raw-loader": "^0.5.1",
     "sass-loader": "^7.1.0",
     "standard": "^12.0.1",
     "through2": "^2.0.3",
