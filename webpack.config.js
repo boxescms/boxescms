@@ -34,6 +34,34 @@ const coreWebpackConfig = {
   module: {
     rules: [
       {
+        test: /\.ts?$/,
+        include: [
+          path.resolve(base, 'web')
+        ],
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            '@babel/preset-typescript',
+            ['@babel/preset-env', {
+              targets: {
+                browsers: browserslist
+              }
+            }]
+          ],
+          plugins: [
+            'lodash',
+            ['@babel/plugin-proposal-decorators', {
+              decoratorsBeforeExport: false,
+              legacy: false
+            }],
+            '@babel/plugin-syntax-dynamic-import',
+            ['@babel/plugin-proposal-class-properties', {
+              loose: false
+            }]
+          ]
+        }
+      },
+      {
         test: /\.js?$/,
         include: [
           path.resolve(base, 'web')

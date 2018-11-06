@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.3] - 2018-11-07
+### Added
+- Experimental TS support for web
+
 ## [0.11.2] - 2018-11-02
 ### Fixed
 - Add missing raw-loader package
