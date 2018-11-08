@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.4] - 2018-11-08
+### Added
+- Experimental ES6 build support for web
+
 ## [0.11.3] - 2018-11-07
 ### Added
 - Experimental TS support for web

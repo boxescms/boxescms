@@ -14,9 +14,17 @@ const webpackFile = hasUserWebpackFile ? userWebpackFile : resolve(__dirname, '.
 
 const webpackConfig = require(webpackFile)
 
+const userWebpackES6File = join(base, 'webpack.config.js')
+const hasUserWebpackES6File = fs.existsSync(userWebpackES6File)
+
+const webpackES6File = hasUserWebpackES6File ? userWebpackES6File : resolve(__dirname, '../../webpack.config.es6.js')
+
+const webpackES6Config = require(webpackES6File)
+
 const basejspath = join(base, 'web/js')
 
 let webpackInstance
+let webpackES6Instance
 
 const logStats = stats => {
   const info = stats.toJson()
@@ -58,6 +66,7 @@ const builder = async (watch = false) => {
     await mkdirp(join(base, 'public', 'js'))
 
     webpackInstance = webpack(webpackConfig)
+    webpackES6Instance = webpack(webpackES6Config)
   }
 
   if (watch) {
@@ -90,26 +99,67 @@ const builder = async (watch = false) => {
       console.log(`${chalk.yellow('JS')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
     })
 
+    webpackES6Instance.watch({
+      ignored: ['node_modules', 'api/**', 'storage/**', 'public/**', 'server/**']
+    }, (err, stats) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+
+      const info = stats.toJson()
+
+      let hasErrors = false
+
+      if (stats.hasErrors()) {
+        info.errors.map(err => console.error(err))
+        hasErrors = true
+      }
+
+      if (stats.hasWarnings()) {
+        info.warnings.map(err => console.warn(err))
+        hasErrors = true
+      }
+
+      if (hasErrors) {
+        return
+      }
+
+      console.log(`${chalk.yellow('ES6')} last compiled at ${chalk.blue('[' + (new Date()) + ']')}`)
+    })
+
     return
   }
 
   try {
-    const stats = await new Promise((resolve, reject) => {
-      webpackInstance.run((err, res) => {
-        if (err) {
-          return reject(err)
-        }
+    const [stats, statsES6] = await Promise.all([
+      new Promise((resolve, reject) => {
+        webpackInstance.run((err, res) => {
+          if (err) {
+            return reject(err)
+          }
 
-        resolve(res)
+          resolve(res)
+        })
+      }),
+      new Promise((resolve, reject) => {
+        webpackES6Instance.run((err, res) => {
+          if (err) {
+            return reject(err)
+          }
+
+          resolve(res)
+        })
       })
-    })
+    ])
 
     logStats(stats)
+    logStats(statsES6)
   } catch (err) {
     console.error(err)
   }
 
-  console.log(`Compiled ${chalk.yellow('JS')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
+  console.log(`Compiled ${chalk.yellow('JS/ES6')} ${chalk.blue('[' + (Date.now() - time) + 'ms]')}`)
 }
 
 module.exports = builder
