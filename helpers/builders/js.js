@@ -62,6 +62,7 @@ const builder = async (watch = false) => {
     }, {})
 
     webpackConfig.entry = entry
+    webpackES6Config.entry = entry
 
     await mkdirp(join(base, 'public', 'js'))
 
