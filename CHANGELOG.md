@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.6] - 2018-11-29
+### Fixed
+- Fix dev server not restarting properly on Node 10
+
 ## [0.11.5] - 2018-11-08
 ### Fixed
 - Experimental ES6 build support for web
