@@ -42,6 +42,23 @@ module.exports = (async () => {
 
   const server = http.createServer(app)
 
+  let killauth
+
+  process.on('message', message => {
+    if (typeof message !== 'object') {
+      return
+    }
+
+    if (message.key === 'init') {
+      killauth = message.value
+    }
+
+    if (message.key === 'kill' && killauth === message.value) {
+      server.close()
+      process.exit(0)
+    }
+  })
+
   await new Promise(resolve => server.listen(process.env.APP_PORT, resolve))
 
   log()
