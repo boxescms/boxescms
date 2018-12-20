@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.8] - 2018-12-20
+### Added
+- Add VERSION in env from user package.json
+
 ## [0.11.7] - 2018-12-20
 ### Fixed
 - Fix custom es6 webpack file not obeyed
