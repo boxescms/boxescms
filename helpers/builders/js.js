@@ -14,7 +14,7 @@ const webpackFile = hasUserWebpackFile ? userWebpackFile : resolve(__dirname, '.
 
 const webpackConfig = require(webpackFile)
 
-const userWebpackES6File = join(base, 'webpack.config.js')
+const userWebpackES6File = join(base, 'webpack.config.es6.js')
 const hasUserWebpackES6File = fs.existsSync(userWebpackES6File)
 
 const webpackES6File = hasUserWebpackES6File ? userWebpackES6File : resolve(__dirname, '../../webpack.config.es6.js')

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.7] - 2018-12-20
+### Fixed
+- Fix custom es6 webpack file not obeyed
+
 ## [0.11.6] - 2018-11-29
 ### Fixed
 - Fix dev server not restarting properly on Node 10
