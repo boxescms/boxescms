@@ -96,7 +96,7 @@ const packageData = require(packageFile)
 packageData.scripts = Object.assign({}, {
   start: 'boxes start',
   watch: 'boxes watch',
-  'server:dev': 'boxes start --watch --inspect',
+  'server:dev': 'boxes start server --watch --inspect',
   'lint:js': 'standard',
   'lint:vue': 'eslint --ext .vue web',
   'lint:pug': 'pug-lint web'
@@ -169,6 +169,7 @@ console.log('* Update .env APP_PORT and DB_* if required.')
 console.log()
 console.log('** Start Server **')
 console.log('* Run `' + chalk.blue('npm start') + '` or `' + chalk.blue('yarn start') + '` to start the server.')
-console.log('* Run `' + chalk.blue('npm run dev') + '` or `' + chalk.blue('yarn dev') + '` to start the server in watch mode.')
+console.log('* Run `' + chalk.blue('npm run watch') + '` or `' + chalk.blue('yarn watch') + '` to start the server with frontend in watch mode.')
+console.log('* Run `' + chalk.blue('npm run server:dev') + '` or `' + chalk.blue('yarn server:dev') + '` to start only server in watch and inspect mode.')
 console.log('---------')
 console.log()

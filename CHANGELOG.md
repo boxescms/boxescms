@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.12.1] - 2019-01-07
+### Fixed
+- Fix CLI scripts logging to reflect server mode
+- Fix init script server:dev to only start server
+
 ## [0.12.0] - 2019-01-07
 ### Updated
 - Update CLI scripts to allow server mode only
