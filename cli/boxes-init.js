@@ -95,24 +95,12 @@ const packageData = require(packageFile)
 
 packageData.scripts = Object.assign({}, {
   start: 'boxes start',
-  dev: 'boxes build && boxes start dev',
-  'server:start': 'boxes start',
-  'server:dev': 'boxes start dev',
-  build: 'boxes build',
-  watch: 'boxes watch'
+  watch: 'boxes watch',
+  'server:dev': 'boxes start --watch --inspect',
+  'lint:js': 'standard',
+  'lint:vue': 'eslint --ext .vue web',
+  'lint:pug': 'pug-lint web'
 }, packageData.scripts)
-
-if (!packageData.scripts['lint:js']) {
-  packageData.scripts['lint:js'] = 'standard'
-}
-
-if (!packageData.scripts['lint:vue']) {
-  packageData.scripts['lint:vue'] = 'eslint --ext .vue web'
-}
-
-if (!packageData.scripts['lint:pug']) {
-  packageData.scripts['lint:pug'] = 'pug-lint web'
-}
 
 if (!packageData.browserslist) {
   packageData.browserslist = browserslist
