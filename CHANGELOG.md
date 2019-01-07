@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.12.0] - 2019-01-07
+### Updated
+- Update CLI scripts to allow server mode only
+
 ## [0.11.8] - 2018-12-20
 ### Added
 - Add VERSION in env from user package.json
