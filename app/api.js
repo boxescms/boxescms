@@ -15,12 +15,21 @@ glob.sync(resolve(base, 'server/api/**/*.js'))
   })
 
 router.use((err, req, res, next) => {
-  console.error(err)
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err)
+  }
 
-  res.status(400)
+  // If status code is 200
+  // means no custom status code has been set
+  // then force it to 400
+  if (res.statusCode === 200) {
+    res.status(400)
+  }
+
   res.json({
     message: err.message
   })
+
   return res.end()
 })
 
