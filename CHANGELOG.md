@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.12.2] - 2019-02-08
+### Updated
+- Allow custom status code response on error handler
+- Surpress error logging on production
+
 ## [0.12.1] - 2019-01-07
 ### Fixed
 - Fix CLI scripts logging to reflect server mode
