@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.0] - 2019-02-13
+### Added
+- Unified, first level db entity `boxescms/db`
+
+### Deprecated
+- `boxescms/entities/db`
+- `boxescms/entities/dbpool`
+
 ## [0.12.2] - 2019-02-08
 ### Updated
 - Allow custom status code response on error handler
