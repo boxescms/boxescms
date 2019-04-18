@@ -31,6 +31,12 @@ const builder = async file => {
   const relativepath = relative(join(base, 'web', 'sass'), fullpath)
   const dir = dirname(relativepath)
   const filename = basename(relativepath, '.sass')
+
+  if (filename[0] === '_') {
+    console.log(`Ignore compilation: ${filename}`)
+    return
+  }
+
   const target = join(base, 'public', 'css', dir, `${filename}.css`)
 
   const sassResult = await sass({
