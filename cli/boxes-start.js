@@ -5,7 +5,6 @@ const program = require('commander')
 const chalk = require('chalk')
 const { log } = console
 
-let env = process.env.NODE_ENV
 let type
 
 program
@@ -32,11 +31,13 @@ program
     }
 
     if (type === 'web') {
-      return require('../helpers/watchers/js')
-      return require('../helpers/watchers/pug')
-      return require('../helpers/watchers/sass')
-      return require('../helpers/watchers/scss')
-      return require('../helpers/watchers/image')
+      require('../helpers/watchers/js')
+      require('../helpers/watchers/pug')
+      require('../helpers/watchers/sass')
+      require('../helpers/watchers/scss')
+      require('../helpers/watchers/image')
+
+      return
     }
 
     return require('../helpers/watch')
