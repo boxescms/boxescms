@@ -4,6 +4,17 @@ require('dotenv').config()
 const program = require('commander')
 const chalk = require('chalk')
 const { log } = console
+const { join } = require('path')
+const fs = require('fs')
+const base = process.cwd()
+
+const userPackageFilePath = join(base, 'package.json')
+
+if (fs.existsSync(userPackageFilePath) && process.env.VERSION === undefined) {
+  const userPackageData = require(userPackageFilePath)
+
+  process.env.VERSION = userPackageData.version
+}
 
 let type
 
