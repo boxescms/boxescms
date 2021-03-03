@@ -64,7 +64,7 @@
     "nodemon": "^1.18.4",
     "normalize.css": "^8.0.0",
     "postcss-loader": "^3.0.0",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "pug-lint": "^2.5.0",
     "pug-plain-loader": "^1.0.0",
     "qs": "^6.5.2",
